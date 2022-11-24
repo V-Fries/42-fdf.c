@@ -1,7 +1,15 @@
+# Executables
+fdf
+fdf_debug
+
+# IDE
+.vscode
+
 # Prerequisites
 *.d
 
 # Object files
+.objs
 *.o
 *.ko
 *.obj
