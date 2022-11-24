@@ -36,6 +36,9 @@ LIBFT_A_DEBUG =		${LIBFT_PATH}libft_debug.a
 LIBFT_PATH =	libft/
 
 
+FRAMEWORKS =	-framework OpenGL -framework AppKit
+
+
 INCLUDES =		-I ${LIBFT_PATH}headers/ -I minilibx_macos/
 
 HEADERS =
@@ -55,8 +58,8 @@ all:			${DIR_OBJS}
 $(NAME):		${OBJS}
 				${MAKE_LIBFT}
 				${MAKE_MLX}
-				${CC} ${FLAGS} ${INCLUDES} ${MLX_L} ${LIBFT_L} ${OBJS}\
-					-o ${NAME}
+				${CC} ${FLAGS} ${FRAMEWORKS} ${INCLUDES} ${MLX_L} ${LIBFT_L}\
+					${OBJS} -o ${NAME}
 
 ${DIR_OBJS}%.o: %.c ${HEADERS} Makefile ${LIBFT_A} ${MLX_A}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
@@ -67,8 +70,8 @@ debug:			${DIR_OBJS}
 ${NAME_DEBUG}:	${OBJS_DEBUG}
 				${MAKE_LIBFT} debug
 				${MAKE_MLX}
-				${CC} ${FLAGS_DEBUG} ${INCLUDES} ${MLX_L} ${LIBFT_L_DEBUG}\
-					${OBJS_DEBUG} -o ${NAME_DEBUG}
+				${CC} ${FLAGS_DEBUG} ${FRAMEWORKS} ${INCLUDES} ${MLX_L}\
+					${LIBFT_L_DEBUG} ${OBJS_DEBUG} -o ${NAME_DEBUG}
 
 ${DIR_OBJS}%_debug.o: %.c ${HEADERS} Makefile ${LIBFT_A_DEBUG} ${MLX_A}
 					cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
