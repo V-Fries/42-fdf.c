@@ -53,11 +53,11 @@ MAKE_LIBFT =	${MAKE} -C ${LIBFT_PATH}
 MAKE_MLX = 		${MAKE} -C ${MLX_PATH}
 
 all:			${DIR_OBJS}
+				${MAKE_LIBFT}
+				${MAKE_MLX}
 				@${MAKE} -j ${NAME}
 
 $(NAME):		${OBJS}
-				${MAKE_LIBFT}
-				${MAKE_MLX}
 				${CC} ${FLAGS} ${FRAMEWORKS} ${INCLUDES} ${MLX_L} ${LIBFT_L}\
 					${OBJS} -o ${NAME}
 
@@ -65,11 +65,11 @@ ${DIR_OBJS}%.o: %.c ${HEADERS} Makefile ${LIBFT_A} ${MLX_A}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 debug:			${DIR_OBJS}
+				${MAKE_LIBFT} debug
+				${MAKE_MLX}
 				${MAKE} -j ${NAME_DEBUG}
 
 ${NAME_DEBUG}:	${OBJS_DEBUG}
-				${MAKE_LIBFT} debug
-				${MAKE_MLX}
 				${CC} ${FLAGS_DEBUG} ${FRAMEWORKS} ${INCLUDES} ${MLX_L}\
 					${LIBFT_L_DEBUG} ${OBJS_DEBUG} -o ${NAME_DEBUG}
 
