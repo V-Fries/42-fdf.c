@@ -18,11 +18,24 @@ FLAGS =			-Wall -Wextra -Werror -O3
 FLAGS_DEBUG	=	${FLAGS} -g3 -fsanitize=address
 
 
-MLX_L =			-L${MLX_PATH} -lmlx
+MLX_L =		-L${MLX_PATH} -lmlx
 
-MLX_A =			${MLX_PATH}libmlx.a
+MLX_A =		${MLX_PATH}libmlx.a
 
-MLX_PATH =		minilibx_macos/
+MLX_PATH =	minilibx_macos/
+
+
+MLX_TOOLS_PATH =		mlx_tools/
+
+MLX_TOOLS_HEADERS =		${MLX_TOOLS_PATH}mlx_tools.h
+
+MLX_TOOLS_A =			${MLX_TOOLS_PATH}mlx_tools.a
+
+MLX_TOOLS_A_DEBUG =		${MLX_TOOLS_PATH}mlx_tools_debug.a
+
+MLX_TOOLS_L	=			-L${MLX_TOOLS_PATH} -lmlx_tools
+
+MLX_TOOLS_L_DEBUG	=	-L${MLX_TOOLS_PATH} -lmlx_tools_debug
 
 
 LIBFT_L =		-L${LIBFT_PATH} -lft
@@ -31,15 +44,28 @@ LIBFT_L_DEBUG =	-L${LIBFT_PATH} -lft_debug
 
 LIBFT_A =		${LIBFT_PATH}libft.a
 
-LIBFT_A_DEBUG =		${LIBFT_PATH}libft_debug.a
+LIBFT_A_DEBUG =	${LIBFT_PATH}libft_debug.a
 
 LIBFT_PATH =	libft/
 
 
-FRAMEWORKS =	-framework OpenGL -framework AppKit
+SHARED_DEPENDENCIES =	${HEADERS} Makefile ${MLX_A}
+
+DEFAULT_DEPENDENCIES =	${LIBFT_A} ${MLX_TOOLS_A}
+
+DEBUG_DEPENDENCIES = 	${LIBFT_A_DEBUG} ${MLX_TOOLS_A_DEBUG}
+
+FRAMEWORKS =			-framework OpenGL -framework AppKit
 
 
-INCLUDES =		-I ${LIBFT_PATH}headers/ -I minilibx_macos/
+SHARED_L = ${MLX_L}
+
+DEBUG_L = ${LIBFT_L_DEBUG} ${MLX_TOOLS_L_DEBUG}
+
+DEFAULT_L = ${LIBFT_L} ${MLX_TOOLS_L}
+
+
+INCLUDES =	-I ${LIBFT_PATH}headers/ -I ${MLX_PATH} -I ${MLX_TOOLS_PATH}
 
 HEADERS =
 
@@ -50,34 +76,35 @@ MKDIR = 		mkdir -p
 
 MAKE_LIBFT =	${MAKE} -C ${LIBFT_PATH}
 
-MAKE_MLX = 		${MAKE} -C ${MLX_PATH}
+MAKE_MLX_TOOLS = 		${MAKE} -C ${MLX_TOOLS_PATH}
+
 
 all:			${DIR_OBJS}
 				${MAKE_LIBFT}
-				${MAKE_MLX}
+				${MAKE_MLX_TOOLS}
 				@${MAKE} -j ${NAME}
 
 $(NAME):		${OBJS}
-				${CC} ${FLAGS} ${FRAMEWORKS} ${INCLUDES} ${MLX_L} ${LIBFT_L}\
-					${OBJS} -o ${NAME}
+				${CC} ${FLAGS} ${FRAMEWORKS} ${INCLUDES} ${SHARED_L}\
+					${DEFAULT_L} ${OBJS} -o ${NAME}
 
-${DIR_OBJS}%.o: %.c ${HEADERS} Makefile ${LIBFT_A} ${MLX_A}
+${DIR_OBJS}%.o: %.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 debug:			${DIR_OBJS}
 				${MAKE_LIBFT} debug
-				${MAKE_MLX}
+				${MAKE_MLX_TOOLS}
 				${MAKE} -j ${NAME_DEBUG}
 
 ${NAME_DEBUG}:	${OBJS_DEBUG}
-				${CC} ${FLAGS_DEBUG} ${FRAMEWORKS} ${INCLUDES} ${MLX_L}\
-					${LIBFT_L_DEBUG} ${OBJS_DEBUG} -o ${NAME_DEBUG}
+				${CC} ${FLAGS_DEBUG} ${FRAMEWORKS} ${INCLUDES} ${SHARED_L}\
+					${DEBUG_L} ${OBJS_DEBUG} -o ${NAME_DEBUG}
 
-${DIR_OBJS}%_debug.o: %.c ${HEADERS} Makefile ${LIBFT_A_DEBUG} ${MLX_A}
+${DIR_OBJS}%_debug.o: %.c ${SHARED_DEPENDENCIES} ${DEBUG_DEPENDENCIES}
 					cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
 
 clean:
-				${MAKE_MLX} clean
+				${MAKE_MLX_TOOLS} clean
 				${MAKE_LIBFT} clean
 				${RMF} ${OBJS} ${OBJS_DEBUG}
 
