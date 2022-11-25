@@ -93,7 +93,7 @@ ${DIR_OBJS}%.o: %.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
 
 debug:			${DIR_OBJS}
 				${MAKE_LIBFT} debug
-				${MAKE_MLX_TOOLS}
+				${MAKE_MLX_TOOLS} debug
 				${MAKE} -j ${NAME_DEBUG}
 
 ${NAME_DEBUG}:	${OBJS_DEBUG}
