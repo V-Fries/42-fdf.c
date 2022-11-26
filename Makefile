@@ -1,6 +1,6 @@
 NAME =			fdf
 
-NAME_DEBUG =	fdf_debug.a
+NAME_DEBUG =	fdf_debug
 
 
 SRCS =			main.c
@@ -129,4 +129,10 @@ ${DIR_OBJS}: Makefile
 				@# Adds mkdir -p at start of each lines
 				@# Executes the script (Creates all folders)
 
-.PHONY:			all debug clean fclean re re_debug
+run:		all
+			./fdf
+
+run_debug:	debug
+			./fdf_debug
+
+.PHONY:			all debug clean fclean re re_debug run run_debug
