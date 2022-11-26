@@ -3,7 +3,11 @@ NAME =			fdf
 NAME_DEBUG =	fdf_debug
 
 
-SRCS =			main.c
+HEADERS =		line_drawing.h
+
+
+SRCS =			main.c			\
+				line_drawing.c
 
 
 DIR_OBJS = 		./.objs/
@@ -67,8 +71,6 @@ DEFAULT_L = ${LIBFT_L} ${MLX_TOOLS_L}
 
 
 INCLUDES =	-I ${LIBFT_PATH}headers/ -I ${MLX_PATH} -I ${MLX_TOOLS_PATH}
-
-HEADERS =
 
 
 RMF =	 		rm -f
