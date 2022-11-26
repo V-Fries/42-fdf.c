@@ -3,11 +3,15 @@ NAME =			fdf
 NAME_DEBUG =	fdf_debug
 
 
-HEADERS =		line_drawing.h
+HEADERS =		line_drawing/line_drawing.h	\
+				parsing/parsing.h	\
+				parsing/get_splited_lines.h
 
 
-SRCS =			main.c			\
-				line_drawing.c
+SRCS =			main.c	\
+				line_drawing/line_drawing.c	\
+				parsing/parsing.c	\
+				parsing/get_splited_lines.c
 
 
 DIR_OBJS = 		./.objs/
