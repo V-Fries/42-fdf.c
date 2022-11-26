@@ -36,11 +36,11 @@ HEADERS = 		mlx_tools.h
 MAKE_MLX =		${MAKE} -C ${MLX_PATH}
 
 all:			${DIR_OBJS}
-				${MAKE_MLX}
+				${MAKE_MLX} -j
 				${MAKE} -j ${NAME}
 
 debug:			${DIR_OBJS}
-				${MAKE_MLX}
+				${MAKE_MLX} -j
 				${MAKE} -j ${NAME_DEBUG}
 
 $(NAME):		${OBJS}
