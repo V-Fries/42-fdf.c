@@ -29,9 +29,9 @@ MLX_TOOLS_PATH =		mlx_tools/
 
 MLX_TOOLS_HEADERS =		${MLX_TOOLS_PATH}mlx_tools.h
 
-MLX_TOOLS_A =			${MLX_TOOLS_PATH}mlx_tools.a
+MLX_TOOLS_A =			${MLX_TOOLS_PATH}libmlx_tools.a
 
-MLX_TOOLS_A_DEBUG =		${MLX_TOOLS_PATH}mlx_tools_debug.a
+MLX_TOOLS_A_DEBUG =		${MLX_TOOLS_PATH}libmlx_tools_debug.a
 
 MLX_TOOLS_L	=			-L${MLX_TOOLS_PATH} -lmlx_tools
 
@@ -54,6 +54,7 @@ SHARED_DEPENDENCIES =	${HEADERS} Makefile ${MLX_A}
 DEFAULT_DEPENDENCIES =	${LIBFT_A} ${MLX_TOOLS_A}
 
 DEBUG_DEPENDENCIES = 	${LIBFT_A_DEBUG} ${MLX_TOOLS_A_DEBUG}
+
 
 FRAMEWORKS =			-framework OpenGL -framework AppKit
 
