@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:14:07 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/27 14:54:37 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/27 20:56:30 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ char	bresenham_3d_driving_axis_y(t_3d_point start, t_3d_point end,
 char	bresenham_3d_driving_axis_z(t_3d_point start, t_3d_point end,
 			t_bresenham_3d bresenham, t_list *last_elem);
 
-int	abs(int i)
+static int	ft_abs(int i)
 {
 	if (i < 0)
 		return (-i);
 	return (i);
 }
 
-t_bresenham_3d	init_bresenham_3d(t_3d_point start, t_3d_point end)
+static t_bresenham_3d	init_bresenham_3d(t_3d_point start, t_3d_point end)
 {
 	t_bresenham_3d	bresenham;
 
-	bresenham.abs_diff.x = abs(end.x - start.x);
-	bresenham.abs_diff.y = abs(end.y - start.y);
-	bresenham.abs_diff.z = abs(end.z - start.z);
+	bresenham.abs_diff.x = ft_abs(end.x - start.x);
+	bresenham.abs_diff.y = ft_abs(end.y - start.y);
+	bresenham.abs_diff.z = ft_abs(end.z - start.z);
 	if (end.x > start.x)
 		bresenham.increment.x = 1;
 	else

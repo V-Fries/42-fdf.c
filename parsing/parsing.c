@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:45:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/26 21:30:41 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/27 20:07:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-#include "get_next_line.h"
+#include "ft_get_next_line.h"
 #include "get_splited_lines.h"
 #include "ft_string.h"
 #include <fcntl.h>

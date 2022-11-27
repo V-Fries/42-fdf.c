@@ -3,15 +3,28 @@ NAME =			fdf
 NAME_DEBUG =	fdf_debug
 
 
-HEADERS =		line_drawing/line_drawing.h	\
-				parsing/parsing.h	\
-				parsing/get_splited_lines.h
+HEADERS =		utils.h	\
+				line_drawing/line_drawing.h	\
+				parsing/parsing.h			\
+				parsing/get_splited_lines.h	\
+				perspective_projection/perspective_projection.h
+
+INCLUDES =	-I ${LIBFT_PATH}headers/	\
+			-I ${MLX_PATH}	\
+			-I ${MLX_TOOLS_PATH}	\
+			-I .	\
+			-I line_drawing/	\
+			-I parsing/	\
+			-I perspective_projection/
 
 
 SRCS =			main.c	\
-				line_drawing/line_drawing.c	\
-				parsing/parsing.c	\
-				parsing/get_splited_lines.c
+				line_drawing/line_drawing.c					\
+				line_drawing/bresenham_3d_driving_axis.c	\
+				line_drawing/bresenham_3d.c					\
+				perspective_projection/perspective_projection.c
+				# parsing/parsing.c
+				# parsing/get_splited_lines.c
 
 
 DIR_OBJS = 		./.objs/
@@ -72,9 +85,6 @@ SHARED_L = ${MLX_L}
 DEBUG_L = ${LIBFT_L_DEBUG} ${MLX_TOOLS_L_DEBUG}
 
 DEFAULT_L = ${LIBFT_L} ${MLX_TOOLS_L}
-
-
-INCLUDES =	-I ${LIBFT_PATH}headers/ -I ${MLX_PATH} -I ${MLX_TOOLS_PATH}
 
 
 RMF =	 		rm -f

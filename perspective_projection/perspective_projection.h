@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   perspective_projection.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/27 19:58:05 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/27 20:04:13 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/27 20:57:17 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PERSPECTIVE_PROJECTION_H
+# define PERSPECTIVE_PROJECTION_H
 
-typedef struct s_2d_point
-{
-	int	x;
-	int	y;
-}	t_2d_point;
-
-typedef struct s_3d_point
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_3d_point;
+t_2d_point	*perspective_projection(t_3d_point a, t_3d_point c, t_3d_point o,
+	t_3d_point e);
 
 #endif
