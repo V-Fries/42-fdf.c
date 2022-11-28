@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_drawing.h                                     :+:      :+:    :+:   */
+/*   matrix_vector_multiplication.h                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 12:47:49 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 23:32:50 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/28 23:14:25 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/28 23:15:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_DRAWING_H
-# define LINE_DRAWING_H
+#ifndef MATRIX_VECTOR_MULTIPLICATION_H
+# define MATRIX_VECTOR_MULTIPLICATION_H
 
+# include "matrices.h"
 # include "points.h"
 
-void	draw_line_low_angle(t_img *img, t_2d_point_i start, t_2d_point_i end);
-void	draw_line_high_angle(t_img *img, t_2d_point_i start, t_2d_point_i end);
-void	draw_line(t_img *img, t_2d_point_i start, t_2d_point_i end);
+void	matrix_vector_multiplication(t_3d_point_d *i, t_3d_point_d *o,
+	t_matrix_4 *m);
 
 #endif

@@ -7,11 +7,11 @@ HEADERS =		utils.h	\
 				line_drawing/line_drawing.h	\
 				parsing/parsing.h			\
 				parsing/get_splited_lines.h	\
-				perspective_projection/perspective_projection.h
+				#perspective_projection/perspective_projection.h
 
 INCLUDES =	-I ${LIBFT_PATH}headers/	\
 			-I ${MLX_PATH}	\
-			-I ${MLX_TOOLS_PATH}	\
+			-I ${MLX_TOOLS_PATH}/headers/	\
 			-I .	\
 			-I line_drawing/	\
 			-I parsing/	\
@@ -19,10 +19,10 @@ INCLUDES =	-I ${LIBFT_PATH}headers/	\
 
 
 SRCS =			main.c	\
-				line_drawing/line_drawing.c					\
-				line_drawing/bresenham_3d_driving_axis.c	\
-				line_drawing/bresenham_3d.c					\
-				perspective_projection/perspective_projection.c
+				line_drawing/line_drawing.c
+				#line_drawing/bresenham_3d_driving_axis.c	\
+				#line_drawing/bresenham_3d.c					\
+				#perspective_projection/perspective_projection.c
 				# parsing/parsing.c
 				# parsing/get_splited_lines.c
 
@@ -48,7 +48,7 @@ MLX_PATH =	minilibx_macos/
 
 MLX_TOOLS_PATH =		mlx_tools/
 
-MLX_TOOLS_HEADERS =		${MLX_TOOLS_PATH}mlx_tools.h
+MLX_TOOLS_HEADERS =		${MLX_TOOLS_PATH}headers/mlx_tools.h
 
 MLX_TOOLS_A =			${MLX_TOOLS_PATH}libmlx_tools.a
 
@@ -70,7 +70,7 @@ LIBFT_A_DEBUG =	${LIBFT_PATH}libft_debug.a
 LIBFT_PATH =	libft/
 
 
-SHARED_DEPENDENCIES =	${HEADERS} Makefile ${MLX_A}
+SHARED_DEPENDENCIES =	Makefile ${MLX_A} # ${HEADERS}
 
 DEFAULT_DEPENDENCIES =	${LIBFT_A} ${MLX_TOOLS_A}
 

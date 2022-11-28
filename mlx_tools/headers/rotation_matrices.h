@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_drawing.h                                     :+:      :+:    :+:   */
+/*   rotation_matrices.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 12:47:49 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 23:32:50 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/29 00:19:24 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/29 00:20:22 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINE_DRAWING_H
-# define LINE_DRAWING_H
+#ifndef ROTATION_MATRICES_H
+# define ROTATION_MATRICES_H
 
-# include "points.h"
+# include "matrices.h"
 
-void	draw_line_low_angle(t_img *img, t_2d_point_i start, t_2d_point_i end);
-void	draw_line_high_angle(t_img *img, t_2d_point_i start, t_2d_point_i end);
-void	draw_line(t_img *img, t_2d_point_i start, t_2d_point_i end);
+t_matrix_4	get_rotation_z_matrix(double rotation);
+t_matrix_4	get_rotation_x_matrix(double rotation);
 
 #endif

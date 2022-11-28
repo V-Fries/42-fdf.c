@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 11:13:35 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 23:36:53 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_img {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		y_size;
+	int		x_size;
 }	t_img;
 
 int		close_window(t_win *win);

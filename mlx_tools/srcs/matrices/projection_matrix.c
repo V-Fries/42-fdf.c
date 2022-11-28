@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 21:55:40 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 00:11:36 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	static_b_zero(void *ptr, size_t len)
 		*(unsigned char*)ptr++ = (unsigned char)0;
 }
 
-/*							Projection matrix visualisation
+/*						Projection matrix visualisation
 
 [	(h/w)*(1/tan(fov/2))	0				0							0	]
 [	0						(1/tan(fov/2))	0							0	]

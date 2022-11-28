@@ -5,6 +5,7 @@ NAME_DEBUG =	libmlx_tools_debug.a
 
 C_FILES =		matrices/matrix_vector_multiplication.c	\
 				matrices/projection_matrix.c			\
+				matrices/rotation_matrices.c			\
 				perspective_projection/perspective_projection.c	\
 				mlx_tools.c
 
@@ -37,7 +38,8 @@ INCLUDES =		-I headers/	\
 				-I ${MLX_PATH}
 
 HEADERS = 		headers/mlx_tools.h	\
-				headers/projection_matrix.h
+				headers/projection_matrix.h	\
+				headers/matrix_vector_multiplication.h
 
 
 MAKE_MLX =		${MAKE} -C ${MLX_PATH}

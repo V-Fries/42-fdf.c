@@ -6,25 +6,26 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:14:07 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 15:07:09 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 23:31:17 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_linked_list.h"
 #include "utils.h"
+#include "points.h"
 #include "bresenham_3d.h"
 #include "ft_numbers.h"
 #include <stdlib.h>
 
-char	add_elem_to_list(t_list **last_elem, t_3d_point content_data);
-char	bresenham_3d_driving_axis_x(t_3d_point start, t_3d_point end,
+char	add_elem_to_list(t_list **last_elem, t_3d_point_i content_data);
+char	bresenham_3d_driving_axis_x(t_3d_point_i start, t_3d_point_i end,
 			t_bresenham_3d bresenham, t_list *last_elem);
-char	bresenham_3d_driving_axis_y(t_3d_point start, t_3d_point end,
+char	bresenham_3d_driving_axis_y(t_3d_point_i start, t_3d_point_i end,
 			t_bresenham_3d bresenham, t_list *last_elem);
-char	bresenham_3d_driving_axis_z(t_3d_point start, t_3d_point end,
+char	bresenham_3d_driving_axis_z(t_3d_point_i start, t_3d_point_i end,
 			t_bresenham_3d bresenham, t_list *last_elem);
 
-static t_bresenham_3d	init_bresenham_3d(t_3d_point start, t_3d_point end)
+static t_bresenham_3d	init_bresenham_3d(t_3d_point_i start, t_3d_point_i end)
 {
 	t_bresenham_3d	bresenham;
 
@@ -47,7 +48,7 @@ static t_bresenham_3d	init_bresenham_3d(t_3d_point start, t_3d_point end)
 }
 
 // Bresenham's Algorithm
-t_list	*bresenham_3d(t_3d_point start, t_3d_point end)
+t_list	*bresenham_3d(t_3d_point_i start, t_3d_point_i end)
 {
 	t_list			*list_of_points;
 	t_bresenham_3d	bresenham;
@@ -82,15 +83,15 @@ t_list	*bresenham_3d(t_3d_point start, t_3d_point end)
 
 // int	main(void)
 // {
-// 	t_3d_point	start = {-1, 1, 1};
-// 	t_3d_point	end = {5, 3, -1};
+// 	t_3d_point_i	start = {-1, 1, 1};
+// 	t_3d_point_i	end = {5, 3, -1};
 // 	t_list *res = bresenham_3d(start, end);
 
 // 	printf("[");
 // 	for (t_list *current = res; current; current = current->next)
 // 	{
-// 		printf("(%d, %d, %d), ", ((t_3d_point *)(current->content))->x,
-//((t_3d_point *)(current->content))->y, ((t_3d_point *)(current->content))->z);
+// 		printf("(%d, %d, %d), ", ((t_3d_point_i *)(current->content))->x,
+//((t_3d_point_i *)(current->content))->y, ((t_3d_point_i *)(current->content))->z);
 // 	}
 // 	printf("]\n");
 // 	ft_lstclear(&res, &free);
