@@ -6,13 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 11:14:07 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/27 20:56:30 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 15:07:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_linked_list.h"
 #include "utils.h"
 #include "bresenham_3d.h"
+#include "ft_numbers.h"
 #include <stdlib.h>
 
 char	add_elem_to_list(t_list **last_elem, t_3d_point content_data);
@@ -22,13 +23,6 @@ char	bresenham_3d_driving_axis_y(t_3d_point start, t_3d_point end,
 			t_bresenham_3d bresenham, t_list *last_elem);
 char	bresenham_3d_driving_axis_z(t_3d_point start, t_3d_point end,
 			t_bresenham_3d bresenham, t_list *last_elem);
-
-static int	ft_abs(int i)
-{
-	if (i < 0)
-		return (-i);
-	return (i);
-}
 
 static t_bresenham_3d	init_bresenham_3d(t_3d_point start, t_3d_point end)
 {

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:45:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/27 20:07:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 13:46:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 // 	clean_splited_lines(&list_len);
 // 	map = init_map(*splited_lines);
 // }
-
 
 t_list	*get_lines(char *map_file, int *list_len)
 {

@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   bresenham_2d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 13:58:14 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/28 14:24:55 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/28 15:06:49 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
+#include "ft_linked_list.h"
 
-typedef struct s_2d_point
+t_list	*bresenham_2d(t_2d_point start, t_2d_point end)
 {
-	int	x;
-	int	y;
-}	t_2d_point;
+	int		d;
+	int		i1;
+	int		i2;
+	int		dx;
+	int		dy;
+	char	angle_is_steep;
 
-typedef struct s_3d_point
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_3d_point;
+	dx = end.x - start.x;
+	dy = end.y - start.y;
 
-typedef struct s_3d_point_double
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_3d_point_double;
 
-typedef struct s_matrix_4
-{
-	double	mat[4][4];
-}	t_matrix_4;
 
-#endif
+
+	i1 = dy * 2;
+	i2 = (dy - dx) * 2;
+	d = i1 - dx;
+
+}
