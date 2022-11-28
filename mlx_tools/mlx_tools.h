@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/25 07:36:39 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 11:13:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,17 @@
 
 enum e_keys
 {
-	ESC = 53
+	KEY_ESC = 53,
+	KEY_W = 13,
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2,
+	KEY_SPACE = 49,
+	KEY_SHIFT = 257,
+	KEY_UP = 126,
+	KEY_DOWN = 125,
+	KEY_LEFT = 123,
+	KEY_RIGHT = 124,
 };
 
 typedef struct s_win

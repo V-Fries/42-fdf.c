@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/27 19:58:05 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 10:31:33 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,12 @@ typedef struct s_3d_point
 	int	y;
 	int	z;
 }	t_3d_point;
+
+typedef struct s_3d_point_double
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_3d_point_double;
 
 #endif

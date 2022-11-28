@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:48:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 00:48:00 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 11:46:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	pre_calculate(register t_pre_calculation *pre,
 // a == the 3D position of a point A that is to be projected.
 // c == the 3D position of a point C representing the camera.
 // o == The orientation of the camera (represented by Tait–Bryan angles).
-static t_3d_point	get_d(t_3d_point a, t_3d_point c, t_3d_point o)
+static t_3d_point_double	get_d(t_3d_point a, t_3d_point c, t_3d_point o)
 {
-	t_3d_point			d;
+	t_3d_point_double	d;
 	t_pre_calculation	pre;
 
 	pre_calculate(&pre, a, c, o);
@@ -75,19 +75,16 @@ static t_3d_point	get_d(t_3d_point a, t_3d_point c, t_3d_point o)
 // c == The 3D position of a point C representing the camera.
 // o == The orientation of the camera (represented by Tait–Bryan angles).
 // e == The display surface's position relative to the camera pinhole C.
-t_2d_point	*perspective_projection(t_3d_point a, t_3d_point c, t_3d_point o,
+t_2d_point	perspective_projection(t_3d_point a, t_3d_point c, t_3d_point o,
 	t_3d_point e)
 {
-	t_3d_point	d;
-	t_2d_point	*b;
+	t_3d_point_double	d;
+	t_2d_point			b;
 	double		pre_calculate;
 
-	b = malloc(sizeof(t_2d_point));
-	if (b == NULL)
-		return (NULL);
 	d = get_d(a, c, o);
 	pre_calculate = (double)e.z / (double)d.z;
-	b->x = pre_calculate * (double)d.x + e.x;
-	b->y = pre_calculate * (double)d.y + e.y;
+	b.x = (pre_calculate * d.x  + 0.5) + e.x;
+	b.y = (pre_calculate * d.y  + 0.5) + e.y;
 	return (b);
 }
