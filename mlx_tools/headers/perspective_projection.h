@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   perspective_projection.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 21:12:14 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/27 20:04:13 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/28 21:14:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PERSPECTIVE_PROJECTION_H
+# define PERSPECTIVE_PROJECTION_H
 
-#define WINDOW_X 1400
-#define WINDOW_Y 800
+# include "points.h"
 
-# include "mlx_tools.h"
-
-typedef struct s_fdf
-{
-	t_win				win;
-	t_img				img;
-	// t_3d_point			camera;
-	// t_3d_point			orientation;
-	// t_3d_point			screen;
-	t_proj_matrix_data	proj_m;
-}	t_fdf;
+t_2d_point_i	perspective_projection(t_3d_point_i a, t_3d_point_i c, t_3d_point_i o,
+	t_3d_point_i e);
 
 #endif

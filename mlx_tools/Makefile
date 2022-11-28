@@ -3,8 +3,13 @@ NAME =			libmlx_tools.a
 NAME_DEBUG =	libmlx_tools_debug.a
 
 
-SRCS =			mlx_tools.c
+C_FILES =		matrices/matrix_vector_multiplication.c	\
+				matrices/projection_matrix.c			\
+				perspective_projection/perspective_projection.c	\
+				mlx_tools.c
 
+
+SRCS = ${addprefix srcs/,${C_FILES}}
 
 DIR_OBJS = 		./.objs/
 
@@ -28,20 +33,23 @@ RMF =	 		rm -f
 MKDIR = 		mkdir -p
 
 
-INCLUDES =		-I headers/ \
+INCLUDES =		-I headers/	\
 				-I ${MLX_PATH}
 
-HEADERS = 		mlx_tools.h
+HEADERS = 		headers/mlx_tools.h	\
+				headers/projection_matrix.h
+
 
 MAKE_MLX =		${MAKE} -C ${MLX_PATH}
 
+
 all:			${DIR_OBJS}
-				${MAKE_MLX} -j
-				${MAKE} -j ${NAME}
+				${MAKE_MLX}
+				${MAKE} ${NAME}
 
 debug:			${DIR_OBJS}
-				${MAKE_MLX} -j
-				${MAKE} -j ${NAME_DEBUG}
+				${MAKE_MLX}
+				${MAKE} ${NAME_DEBUG}
 
 $(NAME):		${OBJS}
 				ar rcs ${NAME} ${OBJS}

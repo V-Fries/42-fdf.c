@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   projection_matrix.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 21:12:14 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/28 21:01:39 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/28 21:43:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef PROJECTION_MATRIX_H
+# define PROJECTION_MATRIX_H
 
-#define WINDOW_X 1400
-#define WINDOW_Y 800
+# include "matrices.h"
 
-# include "mlx_tools.h"
-
-typedef struct s_fdf
+typedef struct s_proj_matrix_data
 {
-	t_win				win;
-	t_img				img;
-	// t_3d_point			camera;
-	// t_3d_point			orientation;
-	// t_3d_point			screen;
-	t_proj_matrix_data	proj_m;
-}	t_fdf;
+	double	z_near;
+	double	z_far;
+	double	fov;
+	double	aspect_ratio;
+}	t_proj_matrix_data;
+
+t_matrix_4	get_projection_matrix(t_proj_matrix_data *data);
 
 #endif

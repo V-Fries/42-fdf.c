@@ -6,13 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 16:48:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 11:46:06 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 21:56:55 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
-#include "utils.h"
+#include "points.h"
 
 typedef struct s_doubles
 {
@@ -33,7 +33,7 @@ typedef struct s_pre_calculation
 
 // Does calculations that are repeated multiple times in the equation
 static void	pre_calculate(register t_pre_calculation *pre,
-	t_3d_point a, t_3d_point c, t_3d_point o)
+	t_3d_point_i a, t_3d_point_i c, t_3d_point_i o)
 {
 	pre->sin_o.x = sin(o.x);
 	pre->sin_o.y = sin(o.y);
@@ -58,9 +58,9 @@ static void	pre_calculate(register t_pre_calculation *pre,
 // a == the 3D position of a point A that is to be projected.
 // c == the 3D position of a point C representing the camera.
 // o == The orientation of the camera (represented by Tait–Bryan angles).
-static t_3d_point_double	get_d(t_3d_point a, t_3d_point c, t_3d_point o)
+static t_3d_point_d	get_d(t_3d_point_i a, t_3d_point_i c, t_3d_point_i o)
 {
-	t_3d_point_double	d;
+	t_3d_point_d	d;
 	t_pre_calculation	pre;
 
 	pre_calculate(&pre, a, c, o);
@@ -75,12 +75,12 @@ static t_3d_point_double	get_d(t_3d_point a, t_3d_point c, t_3d_point o)
 // c == The 3D position of a point C representing the camera.
 // o == The orientation of the camera (represented by Tait–Bryan angles).
 // e == The display surface's position relative to the camera pinhole C.
-t_2d_point	perspective_projection(t_3d_point a, t_3d_point c, t_3d_point o,
-	t_3d_point e)
+t_2d_point_i	perspective_projection(t_3d_point_i a, t_3d_point_i c, t_3d_point_i o,
+	t_3d_point_i e)
 {
-	t_3d_point_double	d;
-	t_2d_point			b;
-	double		pre_calculate;
+	t_3d_point_d	d;
+	t_2d_point_i	b;
+	double			pre_calculate;
 
 	d = get_d(a, c, o);
 	pre_calculate = (double)e.z / (double)d.z;

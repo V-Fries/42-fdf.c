@@ -6,31 +6,21 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 11:47:02 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/28 20:57:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_io.h"
 #include "mlx.h"
-#include "mlx_tools.h"
 #include "utils.h"
 #include "line_drawing.h"
 #include "bresenham_3d.h"
 #include "ft_linked_list.h"
 #include "perspective_projection.h"
+#include "ft_bools.h"
 #include <stdlib.h>
+#include <math.h>
 
-#define WINDOW_X 1400
-#define WINDOW_Y 800
-
-typedef struct s_fdf
-{
-	t_win		win;
-	t_img		img;
-	t_3d_point	camera;
-	t_3d_point	orientation;
-	t_3d_point	screen;
-}	t_fdf;
 
 void	move_camera_y_x(t_fdf *fdf, int key)
 {
@@ -138,13 +128,30 @@ void	add_line(t_fdf *fdf, t_3d_point start, t_3d_point end)
 	ft_lstclear(&vectors, &free);
 }
 
+void	init_fdf(t_fdf *fdf)
+{
+	fdf->win.mlx = mlx_init();
+	fdf->win.win = mlx_new_window(fdf->win.mlx, WINDOW_X, WINDOW_Y, "fdf");
+	init_image(&fdf->img, &fdf->win, WINDOW_Y, WINDOW_X);
+	fdf->proj_m.z_near = 0.1f;
+	fdf->proj_m.z_far = 1000.0f;
+	fdf->proj_m.fov = 90.0f;
+	fdf->proj_m.aspect_ratio = (double)WINDOW_Y / (double)WINDOW_X;
+}
+
+void	start_mlx(t_fdf *fdf)
+{
+	mlx_key_hook(fdf->win.win, &deal_key, &fdf);
+	mlx_loop(fdf->win.mlx);
+}
+
 int	main(void)
 {
 	t_fdf		fdf;
 
-	fdf.win.mlx = mlx_init();
-	fdf.win.win = mlx_new_window(fdf.win.mlx, WINDOW_X, WINDOW_Y, "fdf");
-	init_image(&fdf.img, &fdf.win, WINDOW_Y, WINDOW_X);
+	init_fdf(&fdf);
+
+
 
 	int	arr[11][19] =	{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -157,7 +164,6 @@ int	main(void)
 							{0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 0, 10, 10, 10, 10, 10, 10, 0, 0},
 							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-
 	for (int y = 0; y < 11; y++)
 	{
 		for (int x = 0; x < 19; x++)
@@ -169,22 +175,10 @@ int	main(void)
 		}
 	}
 
-	// while (end.x < 2000)
-	// {
-	// 	t_list *vectors = bresenham_3d(start, end);
-	// 	for (t_list *current = vectors; current; current = current->next)
-	// 	{
-	// 		t_2d_point *pixel = perspective_projection(*((t_3d_point *)current->content), camera, orientation, screen);
-	// 		if (pixel->x < WINDOW_X && pixel->x >= 0 && pixel->y < WINDOW_Y && pixel->y >= 0)
-	// 			put_pixel_on_img(&fdf.img, pixel->y, pixel->x, 0xFFFFFF);
-	// 		free(pixel);
-	// 	}
-	// 	ft_lstclear(&vectors, &free);
-	// 	end.x++;
-	// }
-
 
 	put_img(&fdf.img, &fdf.win);
-	mlx_key_hook(fdf.win.win, &deal_key, &fdf);
-	mlx_loop(fdf.win.mlx);
+
+
+
+	start_mlx(&fdf);
 }
