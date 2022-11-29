@@ -3,10 +3,11 @@ NAME =			libmlx_tools.a
 NAME_DEBUG =	libmlx_tools_debug.a
 
 
-C_FILES =		matrices/matrix_vector_multiplication.c	\
-				matrices/projection_matrix.c			\
+C_FILES =		matrices/get_projection_matrix.c		\
+				matrices/get_world_matrix.c				\
+				matrices/matrix_multiplication.c		\
 				matrices/rotation_matrices.c			\
-				perspective_projection/perspective_projection.c	\
+				vectors/vector_math.c	\
 				mlx_tools.c
 
 
@@ -37,9 +38,13 @@ MKDIR = 		mkdir -p
 INCLUDES =		-I headers/	\
 				-I ${MLX_PATH}
 
-HEADERS = 		headers/mlx_tools.h	\
-				headers/projection_matrix.h	\
-				headers/matrix_vector_multiplication.h
+HEADERS = 		headers/matrices.h				\
+				headers/matrix_multiplication.h	\
+				headers/mlx_tools.h				\
+				headers/points.h				\
+				headers/projection_matrix.h		\
+				headers/rotation_matrices.h		\
+				headers/vector.h
 
 
 MAKE_MLX =		${MAKE} -C ${MLX_PATH}

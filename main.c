@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 00:37:15 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 06:39:43 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 #include "utils.h"
 #include "line_drawing.h"
 #include "ft_linked_list.h"
-#include "perspective_projection.h"
 #include "projection_matrix.h"
-#include "matrix_vector_multiplication.h"
 #include "rotation_matrices.h"
+#include "matrix_multiplication.h"
+#include "world_matrix.h"
+#include "vector.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -107,9 +108,9 @@ int	deal_key(int key, void *param)
 	return (0);
 }
 
-// t_3d_point_i	get_3d_point(int x, int y, int z)
+// t_vector_i	get_vector(int x, int y, int z)
 // {
-// 	t_3d_point_i	new;
+// 	t_vector_i	new;
 
 // 	new.x = x;
 // 	new.y = y;
@@ -117,13 +118,13 @@ int	deal_key(int key, void *param)
 // 	return (new);
 // }
 
-// void	add_line(t_fdf *fdf, t_3d_point_i start, t_3d_point_i end)
+// void	add_line(t_fdf *fdf, t_vector_i start, t_vector_i end)
 // {
 
 // 	t_list *vectors = bresenham_3d(start, end);
 // 	for (t_list *current = vectors; current; current = current->next)
 // 	{
-// 		t_2d_point_i pixel = perspective_projection(*((t_3d_point_i *)current->content), fdf->camera, fdf->orientation, fdf->screen);
+// 		t_2d_point_i pixel = perspective_projection(*((t_vector_i *)current->content), fdf->camera, fdf->orientation, fdf->screen);
 // 		if (pixel.x < WINDOW_X && pixel.x >= 0 && pixel.y < WINDOW_Y && pixel.y >= 0)
 // 			put_pixel_on_img(&fdf->img, pixel.y, pixel.x, 0xFFFFFF);
 // 	}
@@ -166,31 +167,41 @@ int	main(void)
 							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 							{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-	t_matrix_4 proj_m = get_projection_matrix(&fdf.proj_m_data);
-	// t_matrix_4 rot_z_m = get_rotation_z_matrix(90.0);
-	t_matrix_4 rot_x_m = get_rotation_x_matrix(180.0);
 
-	t_3d_point_d	vectors[11][19];
+	fdf.proj_m_data.fov = 90;
+	t_matrix_4 proj_m = get_projection_matrix(&fdf.proj_m_data);
+
+
+	t_matrix_4 rot_z_m = get_rotation_z_matrix(0.0);
+	t_matrix_4 rot_x_m = get_rotation_x_matrix(0.0);
+	t_matrix_4 trans_m = get_translation_matrix(0.0, 0.0, -20.0);
+
+	t_matrix_4 world_m = get_world_matrix(&rot_z_m, &rot_x_m, &trans_m);
+
+	t_vector_d	vectors[11][19];
 	for (int y = 0; y < 11; y++)
 		for (int x = 0; x < 19; x++)
 		{
 			vectors[y][x].x = x;
 			vectors[y][x].y = y;
-			vectors[y][x].z = arr[y][x] - 20.0f;
+			vectors[y][x].z = arr[y][x];
+			vectors[y][x].w = 1.0;
 
-			t_3d_point_d tmp = vectors[y][x];
-			// matrix_vector_multiplication(&tmp, &vectors[y][x], &rot_z_m);
-			// tmp = vectors[y][x];
-			matrix_vector_multiplication(&tmp, &vectors[y][x], &rot_x_m);
-			tmp = vectors[y][x];
+			// vectors[y][x] = matrix_times_vector(&rot_z_m, &vectors[y][x]);
+			// vectors[y][x] = matrix_times_vector(&rot_x_m, &vectors[y][x]);
 
-			matrix_vector_multiplication(&tmp, &vectors[y][x], &proj_m);
+			//vectors[y][x].z -= 20.0;
 
-			vectors[y][x].x += 1.0f;
-			vectors[y][x].y += 1.0f;
+			vectors[y][x] = matrix_times_vector(&world_m, &vectors[y][x]);
 
-			vectors[y][x].x *= 0.5f * (double)WINDOW_X;
-			vectors[y][x].y *= 0.5f * (double)WINDOW_Y;
+			vectors[y][x] = matrix_times_vector(&proj_m, &vectors[y][x]);
+
+			vectors[y][x] = vector_divide(&vectors[y][x], vectors[y][x].w);
+			vectors[y][x].x += 1.0;
+			vectors[y][x].y += 1.0;
+
+			vectors[y][x].x *= 0.5 * (double)WINDOW_X;
+			vectors[y][x].y *= 0.5 * (double)WINDOW_Y;
 		}
 
 	for (int y = 0; y < 11; y++)
@@ -202,10 +213,10 @@ int	main(void)
 				t_2d_point_i start;
 				t_2d_point_i end;
 
-				start.x = vectors[y][x].x + 0.5f;
-				start.y = vectors[y][x].y + 0.5f;
-				end.x = vectors[y][x + 1].x + 0.5f;
-				end.y = vectors[y][x + 1].y + 0.5f;
+				start.x = vectors[y][x].x + 0.5;
+				start.y = vectors[y][x].y + 0.5;
+				end.x = vectors[y][x + 1].x + 0.5;
+				end.y = vectors[y][x + 1].y + 0.5;
 				draw_line(&fdf.img, start, end);
 			}
 			if (y + 1 < 11)
@@ -213,10 +224,10 @@ int	main(void)
 				t_2d_point_i start;
 				t_2d_point_i end;
 
-				start.x = vectors[y][x].x + 0.5f;
-				start.y = vectors[y][x].y + 0.5f;
-				end.x = vectors[y + 1][x].x + 0.5f;
-				end.y = vectors[y + 1][x].y + 0.5f;
+				start.x = vectors[y][x].x + 0.5;
+				start.y = vectors[y][x].y + 0.5;
+				end.x = vectors[y + 1][x].x + 0.5;
+				end.y = vectors[y + 1][x].y + 0.5;
 				draw_line(&fdf.img, start, end);
 			}
 		}

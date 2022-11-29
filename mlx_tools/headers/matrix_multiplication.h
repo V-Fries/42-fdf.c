@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   points.h                                           :+:      :+:    :+:   */
+/*   matrix_multiplication.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 21:11:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 01:59:53 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/28 23:14:25 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/29 02:45:18 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINTS_H
-# define POINTS_H
+#ifndef MATRIX_MULTIPLICATION_H
+# define MATRIX_MULTIPLICATION_H
 
-typedef struct s_2d_point_i
-{
-	int	x;
-	int	y;
-}	t_2d_point_i;
+# include "matrices.h"
+# include "vector.h"
 
-typedef struct s_3d_point_i
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_3d_point_i;
-
-typedef struct s_3d_point_d
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_3d_point_d;
+t_vector_d	matrix_times_vector(t_matrix_4 *m, t_vector_d *i);
+t_matrix_4	matrix_times_matrix(t_matrix_4 *m1, t_matrix_4 *m2);
 
 #endif
