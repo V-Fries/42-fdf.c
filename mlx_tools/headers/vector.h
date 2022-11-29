@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 01:51:47 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 07:19:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 10:36:19 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ double		vector_dot_product(t_vector_d *v1, t_vector_d *v2);
 double		vector_length(t_vector_d *v);
 t_vector_d	vector_normalise(t_vector_d *v);
 t_vector_d	vector_cross_product(t_vector_d *v1, t_vector_d *v2);
+t_vector_d	create_vector(double x, double y, double z, double w);
 
 #endif

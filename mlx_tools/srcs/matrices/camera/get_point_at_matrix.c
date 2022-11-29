@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 06:57:27 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 08:07:38 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 10:29:41 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ typedef struct s_get_point_at_matrix_input
 	t_vector_d	*up;
 }	t_get_point_at_matrix_input;
 
-static void	init_get_point_at_matrix(t_vector_d *new_forward, t_vector_d *new_up,
-			t_vector_d *new_right, t_get_point_at_matrix_input data)
+static void	init_get_point_at_matrix(t_vector_d *new_forward,
+	t_vector_d *new_up, t_vector_d *new_right, t_get_point_at_matrix_input data)
 {
 	t_vector_d	a;
 
@@ -47,7 +47,7 @@ static t_get_point_at_matrix_input	create_data(t_vector_d *pos,
 	return (data);
 }
 
-t_matrix_4 get_point_at_matrix(t_vector_d *pos, t_vector_d *target,
+t_matrix_4	get_point_at_matrix(t_vector_d *pos, t_vector_d *target,
 		t_vector_d *up)
 {
 	t_vector_d	new_forward;

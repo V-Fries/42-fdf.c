@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 23:36:53 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 08:25:08 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ int		close_window(t_win *win);
 int		put_img(t_img *img, t_win *win);
 void	init_image(t_img *img, t_win *win, int y_len, int x_len);
 void	put_pixel_on_img(t_img *img, int y, int x, int color);
-
 
 #endif

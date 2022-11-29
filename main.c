@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 06:41:22 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 10:29:18 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "matrix_multiplication.h"
 #include "world_matrix.h"
 #include "vector.h"
+#include "camera.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -178,6 +179,9 @@ int	main(void)
 
 	t_matrix_4 world_m = get_world_matrix(&rot_z_m, &rot_x_m, &trans_m);
 
+	t_cam		cam;
+	init_camera(&cam);
+
 	t_vector_d	vectors[11][19];
 	for (int y = 0; y < 11; y++)
 		for (int x = 0; x < 19; x++)
@@ -188,6 +192,8 @@ int	main(void)
 			vectors[y][x].w = 1.0;
 
 			vectors[y][x] = matrix_times_vector(&world_m, &vectors[y][x]);
+
+			vectors[y][x] = matrix_times_vector(&cam.view_mat, &vectors[y][x]);
 
 			vectors[y][x] = matrix_times_vector(&proj_m, &vectors[y][x]);
 

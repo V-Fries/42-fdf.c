@@ -16,7 +16,9 @@ HEADERS_NO_PATH =	camera.h				\
 HEADERS = 			${addprefix headers/,${HEADERS_NO_PATH}}
 
 
-C_FILES =		matrices/camera/get_point_at_matrix.c	\
+C_FILES =		matrices/camera/camera.c	\
+				matrices/camera/get_look_at_matrix.c	\
+				matrices/camera/get_point_at_matrix.c	\
 				matrices/get_projection_matrix.c		\
 				matrices/get_world_matrix.c				\
 				matrices/matrix_multiplication.c		\

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 02:14:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 08:11:01 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ t_matrix_4	get_rotation_z_matrix(double rotation)
 	m.m[3][3] = 1;
 	return (m);
 }
-
