@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 08:25:08 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 11:59:49 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_win
 
 typedef struct s_img {
 	void	*img;
+	char	used_img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;

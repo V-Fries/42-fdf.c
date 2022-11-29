@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 02:46:27 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 04:35:23 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 11:45:14 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ t_matrix_4	get_translation_matrix(double x, double y, double z)
 }
 
 t_matrix_4	get_world_matrix(t_matrix_4 *rot_z, t_matrix_4 *rot_x,
-				t_matrix_4 *trans)
+				t_matrix_4 *rot_y, t_matrix_4 *trans)
 {
 	t_matrix_4	world_matrix;
 
 	world_matrix = matrix_times_matrix(rot_z, rot_x);
+	world_matrix = matrix_times_matrix(&world_matrix, rot_y);
 	world_matrix = matrix_times_matrix(&world_matrix, trans);
 	return (world_matrix);
 }

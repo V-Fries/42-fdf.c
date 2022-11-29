@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 08:11:01 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 12:15:47 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	static_b_zero(void *ptr, size_t len)
 {
 	while (len-- > 0)
-		*(unsigned char*)ptr++ = (unsigned char)0;
+		*(unsigned char *)ptr++ = (unsigned char)0;
 }
 
 /*						Rotation X matrix visualisation
