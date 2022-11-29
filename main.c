@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 06:39:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 06:41:22 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,16 +187,12 @@ int	main(void)
 			vectors[y][x].z = arr[y][x];
 			vectors[y][x].w = 1.0;
 
-			// vectors[y][x] = matrix_times_vector(&rot_z_m, &vectors[y][x]);
-			// vectors[y][x] = matrix_times_vector(&rot_x_m, &vectors[y][x]);
-
-			//vectors[y][x].z -= 20.0;
-
 			vectors[y][x] = matrix_times_vector(&world_m, &vectors[y][x]);
 
 			vectors[y][x] = matrix_times_vector(&proj_m, &vectors[y][x]);
 
 			vectors[y][x] = vector_divide(&vectors[y][x], vectors[y][x].w);
+
 			vectors[y][x].x += 1.0;
 			vectors[y][x].y += 1.0;
 

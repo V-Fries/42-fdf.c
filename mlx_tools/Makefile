@@ -3,15 +3,30 @@ NAME =			libmlx_tools.a
 NAME_DEBUG =	libmlx_tools_debug.a
 
 
-C_FILES =		matrices/get_projection_matrix.c		\
+HEADERS_NO_PATH =	camera.h				\
+					matrices.h				\
+					matrix_multiplication.h	\
+					mlx_tools.h				\
+					points.h				\
+					projection_matrix.h		\
+					rotation_matrices.h		\
+					vector.h				\
+					world_matrix.h
+
+HEADERS = 			${addprefix headers/,${HEADERS_NO_PATH}}
+
+
+C_FILES =		matrices/camera/get_point_at_matrix.c	\
+				matrices/get_projection_matrix.c		\
 				matrices/get_world_matrix.c				\
 				matrices/matrix_multiplication.c		\
 				matrices/rotation_matrices.c			\
 				vectors/vector_math.c	\
+				vectors/vector_tools.c	\
 				mlx_tools.c
 
-
 SRCS = ${addprefix srcs/,${C_FILES}}
+
 
 DIR_OBJS = 		./.objs/
 
@@ -37,14 +52,6 @@ MKDIR = 		mkdir -p
 
 INCLUDES =		-I headers/	\
 				-I ${MLX_PATH}
-
-HEADERS = 		headers/matrices.h				\
-				headers/matrix_multiplication.h	\
-				headers/mlx_tools.h				\
-				headers/points.h				\
-				headers/projection_matrix.h		\
-				headers/rotation_matrices.h		\
-				headers/vector.h
 
 
 MAKE_MLX =		${MAKE} -C ${MLX_PATH}
