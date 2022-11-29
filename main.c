@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 12:12:12 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 14:13:23 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,57 @@ void	redraw_fdf(t_fdf *fdf)
 	draw_fdf(fdf);
 }
 
-void	move_camera_z(t_fdf *fdf, int key)
+void	move_camera_y_x(t_fdf *fdf, int key)
+{
+	if (key == KEY_W)
+	{
+		fdf->cam.cam = vector_sub(&fdf->cam.cam, &fdf->cam.forward);
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+	else if (key == KEY_S)
+	{
+		fdf->cam.cam = vector_add(&fdf->cam.cam, &fdf->cam.forward);
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+	else if (key == KEY_D)
+	{
+		fdf->cam.cam.x -= CAM_SPEED;
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+	else if (key == KEY_A)
+	{
+		fdf->cam.cam.x += CAM_SPEED;
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+}
+
+void	move_camera_up_yaw(t_fdf *fdf, int key)
 {
 	if (key == KEY_SPACE)
 	{
-		ft_printf("Going UP\n");
-		fdf->cam.cam.y -= 0.25;
+		fdf->cam.cam.y += CAM_SPEED;
 		update_camera(&fdf->cam);
 		redraw_fdf(fdf);
 	}
 	else if (key == KEY_SHIFT)
 	{
-		ft_printf("Going DOWN\n");
-		fdf->cam.cam.y += 0.25;
+		fdf->cam.cam.y -= CAM_SPEED;
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+	else if (key == KEY_LEFT)
+	{
+		fdf->cam.yaw += CAM_SPEED / M_PI;
+		update_camera(&fdf->cam);
+		redraw_fdf(fdf);
+	}
+	else if (key == KEY_RIGHT)
+	{
+		fdf->cam.yaw -= CAM_SPEED / M_PI;
 		update_camera(&fdf->cam);
 		redraw_fdf(fdf);
 	}
@@ -125,10 +163,11 @@ int	deal_key(int key, void *param)
 	ft_putstr("\n");
 	if (key == KEY_ESC)
 		return (close_window(&((t_fdf *)param)->win));
-	// if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
-	//  	return (move_camera_y_x(param, key), 0);
-	if (key == KEY_SPACE || key == KEY_SHIFT)
-		return (move_camera_z(param, key), 0);
+	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
+		return (move_camera_y_x(param, key), 0);
+	if (key == KEY_SPACE || key == KEY_SHIFT
+		|| key == KEY_LEFT || key == KEY_RIGHT)
+		return (move_camera_up_yaw(param, key), 0);
 	// if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
 	// 	return (change_camera_orientation(param, key), 0);
 	(void)param;

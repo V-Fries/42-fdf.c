@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 11:59:49 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/29 14:09:25 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ enum e_keys
 	KEY_A = 0,
 	KEY_S = 1,
 	KEY_D = 2,
+	KEY_E = 14,
+	KEY_Q = 12,
 	KEY_SPACE = 49,
 	KEY_SHIFT = 257,
 	KEY_UP = 126,
