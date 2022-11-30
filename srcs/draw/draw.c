@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:35:13 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 22:57:14 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ static void	fill_m_v_map(t_fdf *fdf)
 		{
 			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.world,
 					&fdf->map.o_v_map[y][x]);
-			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->cam.view_m,
-					&fdf->map.m_v_map[y][x]);
-			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.proj,
+			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.proj.m,
 					&fdf->map.m_v_map[y][x]);
 			fdf->map.m_v_map[y][x] = vector_divide(&fdf->map.m_v_map[y][x],
 					fdf->map.m_v_map[y][x].w);

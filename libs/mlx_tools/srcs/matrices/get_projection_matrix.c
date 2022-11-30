@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:39:35 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 22:24:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 [	0						0				-(zfar/(zfar-znear))*znear	0	]
 
 																			*/
-t_matrix_4	get_projection_matrix(t_proj_matrix_data *data)
+t_matrix_4	get_projection_matrix(t_proj_m *data)
 {
 	t_matrix_4	m;
 	double		fov_rad;

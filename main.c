@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 22:09:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 00:43:48 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 #include "ft_linked_list.h"
 #include "matrices.h"
 #include "vector.h"
-#include "camera.h"
-#include "camera_fdf.h"
+#include "move_camera.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -49,8 +48,8 @@ void	init_fdf(t_fdf *fdf)
 		fdf->map.m_v_map[y] = malloc(sizeof(t_vector_d) * fdf->map.x_size);
 		for (int x = 0; x < fdf->map.x_size; x++)
 		{
-			fdf->map.o_v_map[y][x].x = x;
-			fdf->map.o_v_map[y][x].y = y;
+			fdf->map.o_v_map[y][x].x = x - fdf->map.x_size / 2;
+			fdf->map.o_v_map[y][x].y = y - fdf->map.y_size / 2;
 			fdf->map.o_v_map[y][x].z = arr[y][x];
 			fdf->map.o_v_map[y][x].w = 1.0;
 		}
@@ -61,21 +60,23 @@ void	init_fdf(t_fdf *fdf)
 	fdf->win.mlx = mlx_init();
 	fdf->win.win = mlx_new_window(fdf->win.mlx, WINDOW_X, WINDOW_Y, "fdf");
 	init_image(&fdf->img, &fdf->win, WINDOW_Y, WINDOW_X);
-	fdf->mats.proj_m_data.z_near = 0.1f;
-	fdf->mats.proj_m_data.z_far = 1000.0f;
-	fdf->mats.proj_m_data.fov = 90.0f;
-	fdf->mats.proj_m_data.aspect_ratio = (double)WINDOW_Y / (double)WINDOW_X;
-	init_camera(&fdf->cam);
-	fdf->mats.proj = get_projection_matrix(&fdf->mats.proj_m_data);
-	fdf->mats.rot_z_rot = 0.0;
-	fdf->mats.rot_z = get_rotation_z_matrix(fdf->mats.rot_z_rot);
-	fdf->mats.rot_x_rot = 0.0;
-	fdf->mats.rot_x = get_rotation_x_matrix(fdf->mats.rot_x_rot);
-	fdf->mats.rot_y_rot = 0.0;
-	fdf->mats.rot_y = get_rotation_y_matrix(fdf->mats.rot_y_rot);
-	fdf->mats.trans = get_translation_matrix(0.0, 0.0, -20.0);
-	fdf->mats.world = get_world_matrix(&fdf->mats.rot_z, &fdf->mats.rot_x,
-			&fdf->mats.rot_y, &fdf->mats.trans);
+	fdf->mats.proj.z_near = 0.1f;
+	fdf->mats.proj.z_far = 1000.0f;
+	fdf->mats.proj.fov = 90.0f;
+	fdf->mats.proj.aspect_ratio = (double)WINDOW_Y / (double)WINDOW_X;
+	fdf->mats.proj.m = get_projection_matrix(&fdf->mats.proj);
+	fdf->mats.rot_z.rot = M_PI;
+	fdf->mats.rot_z.m = get_rotation_z_matrix(fdf->mats.rot_z.rot);
+	fdf->mats.rot_x.rot = 0.0;
+	fdf->mats.rot_x.m = get_rotation_x_matrix(fdf->mats.rot_x.rot);
+	fdf->mats.rot_y.rot = 0.0;
+	fdf->mats.rot_y.m = get_rotation_y_matrix(fdf->mats.rot_y.rot);
+	fdf->mats.trans.x = 0.0;
+	fdf->mats.trans.y = 0.0;
+	fdf->mats.trans.z = -20.0;
+	fdf->mats.trans.m = get_translation_matrix(0.0, 0.0, -20.0);
+	fdf->mats.world = get_world_matrix(&fdf->mats.rot_z.m, &fdf->mats.rot_x.m,
+			&fdf->mats.rot_y.m, &fdf->mats.trans.m);
 }
 
 int	main(void)
@@ -83,10 +84,6 @@ int	main(void)
 	t_fdf		fdf;
 
 	init_fdf(&fdf);
-
-
-	draw_fdf(&fdf);
-
 
 	start_mlx(&fdf);
 }

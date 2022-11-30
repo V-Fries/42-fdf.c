@@ -3,8 +3,7 @@ NAME =			libmlx_tools.a
 NAME_DEBUG =	libmlx_tools_debug.a
 
 
-HEADERS_NO_PATH =	camera.h				\
-					matrices.h				\
+HEADERS_NO_PATH =	matrices.h				\
 					mlx_tools.h				\
 					points.h				\
 					vector.h				\
@@ -12,13 +11,11 @@ HEADERS_NO_PATH =	camera.h				\
 HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}
 
 
-C_FILES =		matrices/camera/camera.c	\
-				matrices/camera/get_look_at_matrix.c	\
-				matrices/camera/get_point_at_matrix.c	\
-				matrices/get_projection_matrix.c		\
+C_FILES =		matrices/get_projection_matrix.c		\
 				matrices/get_world_matrix.c				\
 				matrices/matrix_multiplication.c		\
 				matrices/rotation_matrices.c			\
+				matrices/translation_matrix.c			\
 				utils/utils.c	\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\

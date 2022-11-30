@@ -2,9 +2,9 @@ NAME =			fdf
 
 NAME_DEBUG =	fdf_debug
 
-H_FILES =	camera_fdf.h	\
-			draw.h			\
+H_FILES =	draw.h			\
 			fdf.h			\
+			move_camera.h	\
 			parsing.h		\
 			render_frame.h	\
 			start_mlx.h		\
@@ -19,7 +19,7 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 
 C_FILES =		draw/draw.c			\
 				draw/line_drawing.c	\
-				camera_fdf.c		\
+				move_camera.c		\
 				render_frame.c		\
 				start_mlx.c
 

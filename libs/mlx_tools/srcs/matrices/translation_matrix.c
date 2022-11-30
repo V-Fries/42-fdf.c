@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera_fdf.h                                       :+:      :+:    :+:   */
+/*   translation_matrix.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 18:57:35 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 20:31:06 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/30 22:13:53 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/30 22:14:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAMERA_FDF_H
-# define CAMERA_FDF_H
+#include "matrices.h"
+#include "utils.h"
 
-# include "fdf.h"
+t_matrix_4	get_translation_matrix(double x, double y, double z)
+{
+	t_matrix_4	m;
 
-void	move_camera_y_x(t_fdf *fdf, int *keys);
-void	move_camera_up_down_rotation_z(t_fdf *fdf, int *keys);
-void	move_camera_rotation(t_fdf *fdf, int *keys);
-
-#endif
+	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
+	m.m[0][0] = 1.0;
+	m.m[1][1] = 1.0;
+	m.m[2][2] = 1.0;
+	m.m[3][3] = 1.0;
+	m.m[3][0] = x;
+	m.m[3][1] = y;
+	m.m[3][2] = z;
+	return (m);
+}
