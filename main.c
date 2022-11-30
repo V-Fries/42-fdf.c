@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 14:13:23 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 16:45:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,8 +223,43 @@ void	init_fdf(t_fdf *fdf)
 			&fdf->mats.rot_y, &fdf->mats.trans);
 }
 
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
+int	key_down(int key, t_fdf *fdf)
+{
+	if (key < 0 || key >= MAX_KEY)
+		return (-1);
+	fdf->keys.keys[key] = 1;
+	while (fdf->keys.keys[key])
+		deal_key(key, fdf);
+	return (0);
+}
+
+int	key_up(int key, t_fdf *fdf)
+{
+	if (key < 0 || key >= MAX_KEY)
+		return (-1);
+	fdf->keys.keys[key] = 0;
+	return (0);
+}
+
 void	start_mlx(t_fdf *fdf)
 {
+	int	i;
+
+	i = -1;
+	while (++i < MAX_KEY)
+		fdf->keys.keys[i] = 0;
+	//mlx_hook(fdf->win.win, ON_KEYDOWN, 2, &key_down, fdf);
+	//mlx_hook(fdf->win.win, ON_KEYUP, 3, &key_up, fdf);
 	mlx_key_hook(fdf->win.win, &deal_key, fdf);
 	mlx_loop(fdf->win.mlx);
 }
@@ -237,10 +272,6 @@ int	main(void)
 
 
 	draw_fdf(&fdf);
-	//move_camera_z(&fdf, 49);
-	//move_camera_z(&fdf, 49);
-	//move_camera_z(&fdf, 49);
-	//move_camera_z(&fdf, 49);
 
 
 	start_mlx(&fdf);
