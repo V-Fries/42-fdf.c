@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:38:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 16:14:44 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 20:28:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_keys
 {
 	int	keys[MAX_KEY];
+	int	keys_pressed;
 }	t_keys;
 
 enum e_keys
@@ -54,7 +55,7 @@ typedef struct s_img {
 	int		x_size;
 }	t_img;
 
-int		close_window(t_win *win);
+void		close_window(t_win *win);
 
 int		put_img(t_img *img, t_win *win);
 void	init_image(t_img *img, t_win *win, int y_len, int x_len);

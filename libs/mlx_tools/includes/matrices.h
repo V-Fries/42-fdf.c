@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:28:34 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 21:31:31 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_matrices
 	t_matrix_4			rot_x;
 	double				rot_x_rot;
 	t_matrix_4			rot_y;
+	double				rot_y_rot;
 	t_matrix_4			trans;
 	t_matrix_4			world;
 }	t_matrices;
@@ -56,5 +57,6 @@ t_matrix_4	get_world_matrix(t_matrix_4 *rot_z, t_matrix_4 *rot_x,
 				t_matrix_4 *rot_y, t_matrix_4 *trans);
 void		update_rot_z_matrix(t_matrices *mats);
 void		update_rot_x_matrix(t_matrices *mats);
+void		update_rot_y_matrix(t_matrices *mats);
 
 #endif

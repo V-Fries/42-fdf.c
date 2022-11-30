@@ -2,10 +2,12 @@ NAME =			fdf
 
 NAME_DEBUG =	fdf_debug
 
-H_FILES =	fdf.h	\
-			line_drawing.h	\
-			parsing.h			\
-			get_splited_lines.h	\
+H_FILES =	camera_fdf.h	\
+			draw.h			\
+			fdf.h			\
+			parsing.h		\
+			render_frame.h	\
+			start_mlx.h		\
 
 HEADERS = ${addprefix includes/, ${H_FILES}}
 
@@ -17,7 +19,10 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 
 C_FILES =		draw/draw.c			\
 				draw/line_drawing.c	\
-				camera_fdf.c
+				camera_fdf.c		\
+				render_frame.c		\
+				start_mlx.c
+
 
 
 SRCS =			main.c	\

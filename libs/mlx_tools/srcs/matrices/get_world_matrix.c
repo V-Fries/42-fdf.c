@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 02:46:27 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:41:41 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 21:27:16 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	update_rot_z_matrix(t_matrices *mats)
 void	update_rot_x_matrix(t_matrices *mats)
 {
 	mats->rot_x = get_rotation_x_matrix(mats->rot_x_rot);
+	mats->world = get_world_matrix(&mats->rot_z, &mats->rot_x, &mats->rot_y,
+			&mats->trans);
+}
+
+void	update_rot_y_matrix(t_matrices *mats)
+{
+	mats->rot_y = get_rotation_y_matrix(mats->rot_y_rot);
 	mats->world = get_world_matrix(&mats->rot_z, &mats->rot_x, &mats->rot_y,
 			&mats->trans);
 }

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:37:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 17:44:21 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 20:26:02 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include <stdlib.h>
 
-int	close_window(t_win *win)
+void	close_window(t_win *win)
 {
 	mlx_destroy_window(win->mlx, win->win);
 	exit(0);
