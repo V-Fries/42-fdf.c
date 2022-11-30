@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   world_matrix.h                                     :+:      :+:    :+:   */
+/*   bresenham_2d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 04:27:43 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 11:44:32 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/28 14:24:55 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/30 18:17:12 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_MATRIX_H
-# define WORLD_MATRIX_H
+#include "fdf.h"
+#include "ft_linked_list.h"
 
-# include "matrices.h"
+t_list	*bresenham_2d(t_2d_point start, t_2d_point end)
+{
+	int		d;
+	int		i1;
+	int		i2;
+	int		dx;
+	int		dy;
+	char	angle_is_steep;
 
-t_matrix_4	get_translation_matrix(double x, double y, double z);
-t_matrix_4	get_world_matrix(t_matrix_4 *rot_z, t_matrix_4 *rot_x,
-				t_matrix_4 *rot_y, t_matrix_4 *trans);
+	dx = end.x - start.x;
+	dy = end.y - start.y;
 
-#endif
+
+
+
+	i1 = dy * 2;
+	i2 = (dy - dx) * 2;
+	d = i1 - dx;
+
+}

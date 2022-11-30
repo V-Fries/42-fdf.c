@@ -6,16 +6,18 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:37:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 13:59:06 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 17:44:21 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_tools.h"
 #include "mlx.h"
+#include <stdlib.h>
 
 int	close_window(t_win *win)
 {
-	return (mlx_destroy_window(win->mlx, win->win));
+	mlx_destroy_window(win->mlx, win->win);
+	exit(0);
 }
 
 int	put_img(t_img *img, t_win *win)

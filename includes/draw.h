@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_multiplication.h                            :+:      :+:    :+:   */
+/*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 23:14:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 02:45:18 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/26 12:47:49 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/30 19:25:04 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_MULTIPLICATION_H
-# define MATRIX_MULTIPLICATION_H
+#ifndef DRAW_H
+# define DRAW_H
 
-# include "matrices.h"
-# include "vector.h"
+# include "points.h"
 
-t_vector_d	matrix_times_vector(t_matrix_4 *m, t_vector_d *i);
-t_matrix_4	matrix_times_matrix(t_matrix_4 *m1, t_matrix_4 *m2);
+void	draw_fdf(t_fdf *fdf);
+void	draw_line(t_img *img, t_2d_point_i start, t_2d_point_i end);
 
 #endif

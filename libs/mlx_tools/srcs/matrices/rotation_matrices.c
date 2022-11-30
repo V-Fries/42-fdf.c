@@ -6,19 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 12:15:47 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 19:42:41 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
+#include "utils.h"
 #include <stddef.h>
 #include <math.h>
-
-static void	static_b_zero(void *ptr, size_t len)
-{
-	while (len-- > 0)
-		*(unsigned char *)ptr++ = (unsigned char)0;
-}
 
 /*						Rotation X matrix visualisation
 
@@ -32,7 +27,7 @@ t_matrix_4	get_rotation_x_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	static_b_zero(&m, sizeof(t_matrix_4));
+	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = 1.0;
 	m.m[1][1] = cos(rotation * 0.5);
 	m.m[1][2] = sin(rotation * 0.5);
@@ -54,7 +49,7 @@ t_matrix_4	get_rotation_y_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	static_b_zero(&m, sizeof(t_matrix_4));
+	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = cos(rotation);
 	m.m[0][2] = sin(rotation);
 	m.m[2][0] = -m.m[0][2];
@@ -76,7 +71,7 @@ t_matrix_4	get_rotation_z_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	static_b_zero(&m, sizeof(t_matrix_4));
+	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = cos(rotation);
 	m.m[0][1] = sin(rotation);
 	m.m[1][0] = -m.m[0][1];

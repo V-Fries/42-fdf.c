@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection_matrix.c                                :+:      :+:    :+:   */
+/*   get_projection_matrix.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/29 02:39:29 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 19:39:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projection_matrix.h"
+#include "matrices.h"
+#include "utils.h"
 #include <math.h>
 #include <stddef.h>
-
-static void	static_b_zero(void *ptr, size_t len)
-{
-	while (len-- > 0)
-		*(unsigned char*)ptr++ = (unsigned char)0;
-}
 
 /*						Projection matrix visualisation
 
@@ -31,12 +26,12 @@ static void	static_b_zero(void *ptr, size_t len)
 t_matrix_4	get_projection_matrix(t_proj_matrix_data *data)
 {
 	t_matrix_4	m;
-	double	fov_rad;
-	double	z_far_z_near;
+	double		fov_rad;
+	double		z_far_z_near;
 
 	fov_rad = 1.0 / tan(data->fov * 0.5 / 180.0 * M_PI);
 	z_far_z_near = data->z_far / (data->z_far - data->z_near);
-	static_b_zero(&m, sizeof(t_matrix_4));
+	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = data->aspect_ratio * fov_rad;
 	m.m[1][1] = fov_rad;
 	m.m[2][2] = z_far_z_near;

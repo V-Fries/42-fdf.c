@@ -2,20 +2,23 @@ NAME =			fdf
 
 NAME_DEBUG =	fdf_debug
 
+H_FILES =	fdf.h	\
+			line_drawing.h	\
+			parsing.h			\
+			get_splited_lines.h	\
 
-HEADERS =		utils.h	\
-				line_drawing/line_drawing.h	\
-				parsing/parsing.h			\
-				parsing/get_splited_lines.h	\
-				#perspective_projection/perspective_projection.h
+HEADERS = ${addprefix includes/, ${H_FILES}}
 
-INCLUDES =	-I ${LIBFT_PATH}headers/	\
+INCLUDES =	-I ${LIBFT_PATH}includes/	\
 			-I ${MLX_PATH}	\
-			-I ${MLX_TOOLS_PATH}/headers/	\
-			-I headers
+			-I ${MLX_TOOLS_PATH}/includes/	\
+			-I includes
 
 
-C_FILES =		line_drawing/line_drawing.c
+C_FILES =		draw/draw.c			\
+				draw/line_drawing.c	\
+				camera_fdf.c
+
 
 SRCS =			main.c	\
 				${addprefix srcs/, ${C_FILES}}

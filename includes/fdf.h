@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection_matrix.h                                :+:      :+:    :+:   */
+/*   fdf.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 21:01:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 21:43:07 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/26 11:09:08 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/30 16:30:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTION_MATRIX_H
-# define PROJECTION_MATRIX_H
+#ifndef FDF_H
+# define FDF_H
 
+# define WINDOW_X 1400
+# define WINDOW_Y 800
+
+# include "mlx_tools.h"
 # include "matrices.h"
+# include "camera.h"
 
-typedef struct s_proj_matrix_data
+typedef struct s_map
 {
-	double	z_near;
-	double	z_far;
-	double	fov;
-	double	aspect_ratio;
-}	t_proj_matrix_data;
+	int			**i_map;
+	t_vector_d	**o_v_map;
+	t_vector_d	**m_v_map;
+	int			y_size;
+	int			x_size;
+}	t_map;
 
-t_matrix_4	get_projection_matrix(t_proj_matrix_data *data);
+typedef struct s_fdf
+{
+	t_win		win;
+	t_img		img;
+	t_keys		keys;
+	t_cam		cam;
+	t_map		map;
+	t_matrices	mats;
+}	t_fdf;
 
 #endif

@@ -5,15 +5,11 @@ NAME_DEBUG =	libmlx_tools_debug.a
 
 HEADERS_NO_PATH =	camera.h				\
 					matrices.h				\
-					matrix_multiplication.h	\
 					mlx_tools.h				\
 					points.h				\
-					projection_matrix.h		\
-					rotation_matrices.h		\
 					vector.h				\
-					world_matrix.h
 
-HEADERS = 			${addprefix headers/,${HEADERS_NO_PATH}}
+HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}
 
 
 C_FILES =		matrices/camera/camera.c	\
@@ -23,6 +19,7 @@ C_FILES =		matrices/camera/camera.c	\
 				matrices/get_world_matrix.c				\
 				matrices/matrix_multiplication.c		\
 				matrices/rotation_matrices.c			\
+				utils/utils.c	\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\
 				mlx_tools.c
@@ -52,7 +49,8 @@ RMF =	 		rm -f
 MKDIR = 		mkdir -p
 
 
-INCLUDES =		-I headers/	\
+INCLUDES =		-I includes/	\
+				-I srcs/utils/	\
 				-I ${MLX_PATH}
 
 

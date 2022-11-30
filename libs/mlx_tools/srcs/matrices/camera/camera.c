@@ -6,14 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:17:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 15:11:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/11/30 19:39:02 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-#include "rotation_matrices.h"
-#include "matrix_multiplication.h"
-#include "camera.h"
+#include "matrices.h"
 
 void	init_camera(t_cam *cam)
 {

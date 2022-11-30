@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrices.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 21:43:31 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/11/30 18:51:26 by vfries            #+#    #+#             */
+/*   Updated: 2022/11/30 18:52:17 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRICES_H
-# define MATRICES_H
+#include <stddef.h>
 
-typedef struct s_matrix_4
+void	mlx_tools_b_zero(void *ptr, size_t len)
 {
-	double	m[4][4];
-}	t_matrix_4;
-
-#endif
+	while (len-- > 0)
+		*(unsigned char *)ptr++ = (unsigned char)0;
+}
