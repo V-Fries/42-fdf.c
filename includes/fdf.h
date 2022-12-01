@@ -18,6 +18,7 @@
 
 # include "mlx_tools.h"
 # include "matrices.h"
+# include "keys.h"
 
 typedef struct s_map
 {

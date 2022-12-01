@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 22:50:12 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:28:39 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ typedef struct s_matrices
 t_vector_d	matrix_times_vector(t_matrix_4 *m, t_vector_d *i);
 t_matrix_4	matrix_times_matrix(t_matrix_4 *m1, t_matrix_4 *m2);
 
-
 t_matrix_4	get_projection_matrix(t_proj_m *data);
+t_vector_d	apply_projection_matrix(t_matrix_4 *m, t_vector_d *v,
+				double window_x, double window_y);
 
 t_matrix_4	get_rotation_z_matrix(double rotation);
 t_matrix_4	get_rotation_y_matrix(double rotation);

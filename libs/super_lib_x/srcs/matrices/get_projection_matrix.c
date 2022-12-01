@@ -6,12 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 22:24:27 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:26:51 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
 #include "utils.h"
+#include "vector.h"
 #include <math.h>
 #include <stddef.h>
 
@@ -38,4 +39,16 @@ t_matrix_4	get_projection_matrix(t_proj_m *data)
 	m.m[3][2] = (-z_far_z_near) * data->z_near;
 	m.m[2][3] = 1.0;
 	return (m);
+}
+
+t_vector_d	apply_projection_matrix(t_matrix_4 *m, t_vector_d *v,
+		double window_x, double window_y)
+{
+	t_vector_d	new;
+
+	new = matrix_times_vector(m, v);
+	new = vector_divide(&new, new.w);
+	new.x = (new.x + 1.0) * window_x / 2;
+	new.y = (new.y + 1.0) * window_y / 2;
+	return (new);
 }

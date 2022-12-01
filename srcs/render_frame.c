@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:10:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 22:58:29 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:12:23 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	deal_key(t_fdf *fdf)
 
 	keys = fdf->keys.keys;
 	if (keys[KEY_ESC])
-		close_window(&((t_fdf *)fdf)->win);
+		close_window(&fdf->win);
 	if (keys[KEY_W] || keys[KEY_A] || keys[KEY_S] || keys[KEY_D])
 		move_camera_y_x(fdf, keys);
 	if (keys[KEY_SPACE] || keys[KEY_SHIFT] || keys[KEY_E] || keys[KEY_Q])

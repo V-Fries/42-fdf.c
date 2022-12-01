@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 11:07:53 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:24:55 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 02:27:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "fdf.h"
 #include "points.h"
 
-static void	draw_line_low_angle(t_img *img, t_2d_point_i start, t_2d_point_i end)
+static void	draw_line_low_angle(t_img *img, t_2d_point_i start,
+	t_2d_point_i end)
 {
 	double	current_y;
 	double	coef;
@@ -31,7 +32,8 @@ static void	draw_line_low_angle(t_img *img, t_2d_point_i start, t_2d_point_i end
 	}
 }
 
-static void	draw_line_high_angle(t_img *img, t_2d_point_i start, t_2d_point_i end)
+static void	draw_line_high_angle(t_img *img, t_2d_point_i start,
+	t_2d_point_i end)
 {
 	double	current_x;
 	double	coef;

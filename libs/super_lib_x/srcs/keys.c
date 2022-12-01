@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 03:21:23 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/01 05:07:29 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/01 06:16:10 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "start_mlx.h"
-#include "init_fdf.h"
-#include "fdf.h"
+#include "keys.h"
 
-int	main(void)
+int	key_down(int key, t_keys *keys)
 {
-	t_fdf		fdf;
+	if (key < 0 || key >= MAX_KEY)
+		return (-1);
+	keys->keys[key] = 1;
+	keys->keys_pressed++;
+	return (0);
+}
 
-	init_fdf(&fdf);
-	start_mlx(&fdf);
+int	key_up(int key, t_keys *keys)
+{
+	if (key < 0 || key >= MAX_KEY)
+		return (-1);
+	keys->keys[key] = 0;
+	keys->keys_pressed--;
+	return (0);
 }

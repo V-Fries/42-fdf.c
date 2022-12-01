@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 00:45:42 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:31:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "math.h"
 #include "fdf.h"
 #include "draw.h"
+#include "keys.h"
 
 #define CAM_SPEED 0.25
 

@@ -6,14 +6,17 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 22:57:14 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:38:24 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "points.h"
-#include "vector.h"
 #include "draw.h"
+#include "get_no_clip_vectors.h"
+#include <stdlib.h>
+
+#define BACK_GROUND_COLOR 0x000000
 
 static t_2d_point_i	get_2d_point_from_vector(t_vector_d vec)
 {
@@ -24,32 +27,24 @@ static t_2d_point_i	get_2d_point_from_vector(t_vector_d vec)
 	return (new);
 }
 
-static void	draw_lines(t_fdf *fdf)
+static void	draw_lines(t_fdf *fdf, t_list *vectors)
 {
-	t_2d_point_i	start;
-	t_2d_point_i	end;
-	int				y;
-	int				x;
+	t_list	*free_me;
 
-	y = -1;
-	while (++y < 11)
+	while (vectors)
 	{
-		x = -1;
-		while (++x < 19)
+		if (vectors->content == NULL)
 		{
-			if (x + 1 < 19)
-			{
-				start = get_2d_point_from_vector(fdf->map.m_v_map[y][x]);
-				end = get_2d_point_from_vector(fdf->map.m_v_map[y][x + 1]);
-				draw_line(&fdf->img, start, end);
-			}
-			if (y + 1 < 11)
-			{
-				start = get_2d_point_from_vector(fdf->map.m_v_map[y][x]);
-				end = get_2d_point_from_vector(fdf->map.m_v_map[y + 1][x]);
-				draw_line(&fdf->img, start, end);
-			}
+			vectors = vectors->next;
+			continue ;
 		}
+		draw_line(&fdf->img,
+			get_2d_point_from_vector(((t_vector_d *)(vectors->content))[0]),
+			get_2d_point_from_vector(((t_vector_d *)(vectors->content))[1]));
+		free(vectors->content);
+		free_me = vectors;
+		vectors = vectors->next;
+		free(free_me);
 	}
 }
 
@@ -63,19 +58,33 @@ static void	fill_m_v_map(t_fdf *fdf)
 	{
 		x = -1;
 		while (++x < 19)
-		{
 			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.world,
 					&fdf->map.o_v_map[y][x]);
-			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.proj.m,
-					&fdf->map.m_v_map[y][x]);
-			fdf->map.m_v_map[y][x] = vector_divide(&fdf->map.m_v_map[y][x],
-					fdf->map.m_v_map[y][x].w);
-			fdf->map.m_v_map[y][x].x += 1.0;
-			fdf->map.m_v_map[y][x].y += 1.0;
-			fdf->map.m_v_map[y][x].x *= 0.5 * (double)WINDOW_X;
-			fdf->map.m_v_map[y][x].y *= 0.5 * (double)WINDOW_Y;
+	}
+}
+
+static t_list	*fix_clipping(t_fdf *fdf)
+{
+	int		y;
+	int		x;
+	t_list	*vectors;
+
+	vectors = NULL;
+	y = -1;
+	while (++y < fdf->map.y_size)
+	{
+		x = -1;
+		while (++x < fdf->map.x_size)
+		{
+			if (x + 1 < 19)
+				get_no_clip_vectors(fdf, &vectors,
+					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y][x + 1]);
+			if (y + 1 < 11)
+				get_no_clip_vectors(fdf, &vectors,
+					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y + 1][x]);
 		}
 	}
+	return (vectors);
 }
 
 void	draw_fdf(t_fdf *fdf)
@@ -88,9 +97,9 @@ void	draw_fdf(t_fdf *fdf)
 	{
 		x = -1;
 		while (++x < fdf->img.x_size)
-			put_pixel_on_img(&fdf->img, y, x, 0x000000);
+			put_pixel_on_img(&fdf->img, y, x, BACK_GROUND_COLOR);
 	}
 	fill_m_v_map(fdf);
-	draw_lines(fdf);
+	draw_lines(fdf, fix_clipping(fdf));
 	put_img(&fdf->img, &fdf->win);
 }

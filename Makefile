@@ -2,12 +2,14 @@ NAME =			fdf
 
 NAME_DEBUG =	fdf_debug
 
-H_FILES =	draw.h			\
-			fdf.h			\
-			move_camera.h	\
-			parsing.h		\
-			render_frame.h	\
-			start_mlx.h		\
+H_FILES =	draw.h					\
+			fdf.h					\
+			get_no_clip_vectors.h	\
+			init_fdf.h				\
+			move_camera.h			\
+			parsing.h				\
+			render_frame.h			\
+			start_mlx.h				\
 
 HEADERS = ${addprefix includes/, ${H_FILES}}
 
@@ -18,8 +20,10 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 			-I includes
 
 
-C_FILES =		draw/draw.c			\
-				draw/line_drawing.c	\
+C_FILES =		draw/draw.c							\
+				draw/get_no_clip_vectors.c			\
+				draw/line_drawing.c					\
+				init_fdf.c			\
 				move_camera.c		\
 				render_frame.c		\
 				start_mlx.c
@@ -65,7 +69,7 @@ LIBFT_A_DEBUG =	${LIBFT_PATH}libft_debug.a
 LIBFT_PATH =	libs/libft/
 
 
-SHARED_DEPENDENCIES =	Makefile # ${HEADERS}
+SHARED_DEPENDENCIES =	Makefile ${HEADERS}
 
 DEFAULT_DEPENDENCIES =	${LIBFT_A} ${SLX_A}
 

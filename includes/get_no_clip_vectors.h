@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_no_clip_vectors.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 03:21:23 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/01 06:02:36 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/01 06:36:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "start_mlx.h"
-#include "init_fdf.h"
-#include "fdf.h"
+#ifndef GET_NO_CLIP_VECTORS_H
+# define GET_NO_CLIP_VECTORS_H
 
-int	main(void)
-{
-	t_fdf		fdf;
+# include "fdf.h"
+# include "ft_linked_list.h"
 
-	init_fdf(&fdf);
-	start_mlx(&fdf);
-}
+void	get_no_clip_vectors(t_fdf *fdf, t_list **vectors,
+			t_vector_d start, t_vector_d end);
+
+#endif

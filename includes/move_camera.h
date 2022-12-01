@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_camera.h                                       :+:      :+:    :+:   */
+/*   move_camera.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:57:35 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 20:31:06 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:13:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef move_camera_H
-# define move_camera_H
+#ifndef MOVE_CAMERA_H
+# define MOVE_CAMERA_H
 
 # include "fdf.h"
 

@@ -3,7 +3,8 @@ NAME =			libslx.a
 NAME_DEBUG =	libslx_debug.a
 
 
-HEADERS_NO_PATH =	matrices.h				\
+HEADERS_NO_PATH =	keys.h					\
+					matrices.h				\
 					mlx_tools.h				\
 					points.h				\
 					vector.h				\
@@ -19,6 +20,7 @@ C_FILES =		matrices/get_projection_matrix.c		\
 				utils/utils.c	\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\
+				keys.c	\
 				mlx_tools.c
 
 SRCS = ${addprefix srcs/,${C_FILES}}
