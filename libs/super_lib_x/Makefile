@@ -1,6 +1,6 @@
-NAME =			libmlx_tools.a
+NAME =			libslx.a
 
-NAME_DEBUG =	libmlx_tools_debug.a
+NAME_DEBUG =	libslx_debug.a
 
 
 HEADERS_NO_PATH =	matrices.h				\
@@ -36,7 +36,7 @@ FLAGS =			-Wall -Wextra -Werror -O3
 DEBUG_FLAGS	=	${FLAGS} -g3 -fsanitize=address
 
 
-MLX_PATH =		../minilibx_macos/
+MLX_PATH =		minilibx_macos/
 
 MLX_A =			${MLX_PATH}libmlx.a
 
@@ -63,9 +63,11 @@ debug:			${DIR_OBJS}
 				${MAKE} ${NAME_DEBUG}
 
 $(NAME):		${OBJS}
+				cp ${MLX_PATH}libmlx.a ${NAME}
 				ar rcs ${NAME} ${OBJS}
 
 ${NAME_DEBUG}: ${OBJS_DEBUG}
+				cp ${MLX_PATH}libmlx.a ${NAME_DEBUG}
 				ar rcs ${NAME_DEBUG} ${OBJS_DEBUG}
 
 ${DIR_OBJS}%.o: %.c ${HEADERS} Makefile ${MLX_A}
