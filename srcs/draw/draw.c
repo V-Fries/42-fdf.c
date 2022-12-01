@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 06:38:24 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 06:45:53 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static t_list	*fix_clipping(t_fdf *fdf)
 		while (++x < fdf->map.x_size)
 		{
 			if (x + 1 < 19)
-				get_no_clip_vectors(fdf, &vectors,
+				get_no_clip_vectors(&fdf->mats.proj.m, &vectors,
 					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y][x + 1]);
 			if (y + 1 < 11)
-				get_no_clip_vectors(fdf, &vectors,
+				get_no_clip_vectors(&fdf->mats.proj.m, &vectors,
 					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y + 1][x]);
 		}
 	}
