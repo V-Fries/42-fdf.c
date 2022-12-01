@@ -12,11 +12,11 @@ HEADERS_NO_PATH =	keys.h					\
 HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}
 
 
-C_FILES =		matrices/get_projection_matrix.c		\
-				matrices/get_world_matrix.c				\
-				matrices/matrix_multiplication.c		\
+C_FILES =		matrices/matrix_multiplication.c		\
+				matrices/projection_matrix.c			\
 				matrices/rotation_matrices.c			\
 				matrices/translation_matrix.c			\
+				matrices/world_matrix.c					\
 				utils/utils.c	\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\

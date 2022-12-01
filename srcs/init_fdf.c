@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_fdf.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/01 07:31:34 by vfries           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "mlx.h"
 #include <limits.h>
@@ -51,7 +63,8 @@ static void	init_matrices(t_fdf *fdf, int lowest_point)
 	fdf->mats.proj.z_far = 1000.0f;
 	fdf->mats.proj.fov = 90.0f;
 	fdf->mats.proj.aspect_ratio = (double)WINDOW_Y / (double)WINDOW_X;
-	fdf->mats.proj.m = get_projection_matrix(&fdf->mats.proj);
+	fdf->mats.proj.m = get_prespective_proj_matrix(&fdf->mats.proj);
+	fdf->mats.proj.type = 0;
 	fdf->mats.rot_z.rot = M_PI;
 	fdf->mats.rot_z.m = get_rotation_z_matrix(fdf->mats.rot_z.rot);
 	fdf->mats.rot_x.rot = 0.0;

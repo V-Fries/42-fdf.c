@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 05:07:58 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 06:09:19 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 07:33:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ enum e_keys
 	KEY_DOWN = 125,
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
+	KEY_P = 35,
 };
 
 enum
