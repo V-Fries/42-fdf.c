@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 00:43:48 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/01 01:33:34 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "move_camera.h"
 #include <stdlib.h>
 #include <math.h>
+#include "limits.h"
 
 void	init_fdf(t_fdf *fdf)
 {
@@ -42,12 +43,15 @@ void	init_fdf(t_fdf *fdf)
 		fdf->map.i_map[i] = arr[i];
 	fdf->map.o_v_map = malloc(sizeof(t_vector_d *) * fdf->map.y_size);
 	fdf->map.m_v_map = malloc(sizeof(t_vector_d *) * fdf->map.y_size);
+	int	lowest_point = INT_MAX;
 	for (int y = 0; y < fdf->map.y_size; y++)
 	{
 		fdf->map.o_v_map[y] = malloc(sizeof(t_vector_d) * fdf->map.x_size);
 		fdf->map.m_v_map[y] = malloc(sizeof(t_vector_d) * fdf->map.x_size);
 		for (int x = 0; x < fdf->map.x_size; x++)
 		{
+			if (arr[y][x] < lowest_point)
+				lowest_point = arr[y][x];
 			fdf->map.o_v_map[y][x].x = x - fdf->map.x_size / 2;
 			fdf->map.o_v_map[y][x].y = y - fdf->map.y_size / 2;
 			fdf->map.o_v_map[y][x].z = arr[y][x];
@@ -73,8 +77,9 @@ void	init_fdf(t_fdf *fdf)
 	fdf->mats.rot_y.m = get_rotation_y_matrix(fdf->mats.rot_y.rot);
 	fdf->mats.trans.x = 0.0;
 	fdf->mats.trans.y = 0.0;
-	fdf->mats.trans.z = -20.0;
-	fdf->mats.trans.m = get_translation_matrix(0.0, 0.0, -20.0);
+	fdf->mats.trans.z = lowest_point - 20.0;
+	fdf->mats.trans.m = get_translation_matrix(fdf->mats.trans.x,
+			fdf->mats.trans.y, fdf->mats.trans.z);
 	fdf->mats.world = get_world_matrix(&fdf->mats.rot_z.m, &fdf->mats.rot_x.m,
 			&fdf->mats.rot_y.m, &fdf->mats.trans.m);
 }
@@ -84,6 +89,5 @@ int	main(void)
 	t_fdf		fdf;
 
 	init_fdf(&fdf);
-
 	start_mlx(&fdf);
 }
