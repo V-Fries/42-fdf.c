@@ -4,7 +4,6 @@ NAME_DEBUG =	fdf_debug
 
 H_FILES =	draw.h					\
 			fdf.h					\
-			get_no_clip_vectors.h	\
 			init_fdf.h				\
 			move_camera.h			\
 			parsing.h				\
@@ -21,7 +20,7 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 
 
 C_FILES =		draw/draw.c							\
-				draw/get_no_clip_vectors.c			\
+				draw/get_clipped_lines.c			\
 				draw/line_drawing.c					\
 				init_fdf.c			\
 				move_camera.c		\

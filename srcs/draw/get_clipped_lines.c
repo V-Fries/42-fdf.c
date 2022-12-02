@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_no_clip_vectors.c                              :+:      :+:    :+:   */
+/*   get_clipped_lines.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:04:55 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:37:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 #include "fdf.h"
 #include <stdlib.h>
 
+// v1 is assumed to be on the screen !
 static t_vector_d	get_fixed_vector(t_proj_m *proj,
-						t_vector_d v1, t_vector_d v2)
+					t_vector_d v1, t_vector_d v2)
 {
 	t_vector_d	new;
 	double		n;
@@ -28,60 +29,34 @@ static t_vector_d	get_fixed_vector(t_proj_m *proj,
 	return (new);
 }
 
-static void	add_line_to_draw(t_list **vectors, t_vector_d start, t_vector_d end)
+static void	add_line_to_draw(t_list **lines_to_draw,
+			t_vector_d start, t_vector_d end)
 {
 	t_vector_d	*ret;
 
 	ret = malloc(sizeof(t_vector_d) * 2);
 	if (ret == NULL)
 		return ;
-	// start.x = (start.x / start.w) * 1400.0;
-	// start.y = (start.y / start.w) * 1400.0;
-	// end.x = (end.x / end.w) * 1400.0;
-	// end.y = (end.y / end.w) * 1400.0;
-	// ret[0] = start;
-	// ret[1] = end;
-	// if (start.w != 0.1)
-	// {
 	ret[0] = vector_divide(&start, start.w);
 	ret[0].x = (ret[0].x + 1.0) * WINDOW_X / 2;
 	ret[0].y = (ret[0].y + 1.0) * WINDOW_Y / 2;
-	// }
-	// else
-	// 	ret[0] = start;
-	// if (end.w != 0.1)
-	// {
-		ret[1] = vector_divide(&end, end.w);
-		ret[1].x = (ret[1].x + 1.0) * WINDOW_X / 2;
-		ret[1].y = (ret[1].y + 1.0) * WINDOW_Y / 2;
-	// }
-	// else
-	// 	ret[1] = end;
-	ft_lstadd_front(vectors, ft_lstnew(ret));
+	ret[1] = vector_divide(&end, end.w);
+	ret[1].x = (ret[1].x + 1.0) * WINDOW_X / 2;
+	ret[1].y = (ret[1].y + 1.0) * WINDOW_Y / 2;
+	ft_lstadd_front(lines_to_draw, ft_lstnew(ret));
 }
 
-
-#include "ft_io.h"
-void	get_no_clip_vectors(t_proj_m *proj, t_list **vectors,
+//	If vector.w is below z_near, it means the vector is behind the screen
+//	the vector need to be cliped at the position it would have at the
+//	screen edge
+void	get_clipped_line(t_proj_m *proj, t_list **lines_to_draw,
 		t_vector_d start, t_vector_d end)
 {
 	if (start.w < proj->z_near && end.w < proj->z_near)
-	{
-		ft_putstr("WTF is that!");
 		return ;
-	}
-	if (start.w < proj->z_near)
-	{
-		ft_putstr("WTF is that!");
-		start = get_fixed_vector(proj, end, start);
-		return (add_line_to_draw(vectors, start, end));
-	}
 	if (end.w < proj->z_near)
-	{
-		ft_putstr("WTF is that!");
 		end = get_fixed_vector(proj, start, end);
-		return (add_line_to_draw(vectors, start, end));
-	}
-	// ft_putstr("Cool vector!");
-	return (add_line_to_draw(vectors, start, end));
+	else if (start.w < proj->z_near)
+		start = get_fixed_vector(proj, end, start);
+	return (add_line_to_draw(lines_to_draw, start, end));
 }

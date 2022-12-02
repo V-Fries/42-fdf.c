@@ -6,14 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:09:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:40:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "points.h"
 #include "draw.h"
-#include "get_no_clip_vectors.h"
 #include <stdlib.h>
 
 #define BACK_GROUND_COLOR 0x000000
@@ -24,8 +23,6 @@ static t_2d_point_i	get_2d_point_from_vector(t_vector_d vec)
 
 	new.x = vec.x + 0.5;
 	new.y = vec.y + 0.5;
-	// new.x = vec.x;
-	// new.y = vec.y;
 	return (new);
 }
 
@@ -69,13 +66,13 @@ static void	fill_m_v_map(t_fdf *fdf)
 	}
 }
 
-static t_list	*fix_clipping(t_fdf *fdf)
+static t_list	*get_lines(t_fdf *fdf)
 {
 	int		y;
 	int		x;
-	t_list	*vectors;
+	t_list	*lines_to_draw;
 
-	vectors = NULL;
+	lines_to_draw = NULL;
 	y = -1;
 	while (++y < fdf->map.y_size)
 	{
@@ -83,14 +80,14 @@ static t_list	*fix_clipping(t_fdf *fdf)
 		while (++x < fdf->map.x_size)
 		{
 			if (x + 1 < 19)
-				get_no_clip_vectors(&fdf->mats.proj, &vectors,
+				get_clipped_line(&fdf->mats.proj, &lines_to_draw,
 					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y][x + 1]);
 			if (y + 1 < 11)
-				get_no_clip_vectors(&fdf->mats.proj, &vectors,
+				get_clipped_line(&fdf->mats.proj, &lines_to_draw,
 					fdf->map.m_v_map[y][x], fdf->map.m_v_map[y + 1][x]);
 		}
 	}
-	return (vectors);
+	return (lines_to_draw);
 }
 
 void	draw_fdf(t_fdf *fdf)
@@ -106,6 +103,6 @@ void	draw_fdf(t_fdf *fdf)
 			put_pixel_on_img(&fdf->img, y, x, BACK_GROUND_COLOR);
 	}
 	fill_m_v_map(fdf);
-	draw_lines(fdf, fix_clipping(fdf));
+	draw_lines(fdf, get_lines(fdf));
 	put_img(&fdf->img, &fdf->win);
 }

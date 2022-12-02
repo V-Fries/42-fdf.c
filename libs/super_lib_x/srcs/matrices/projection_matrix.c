@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:16:25 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:18:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,4 @@ t_matrix_4	get_iso_proj_matrix(t_proj_m *data)
 	m.m[3][2] = -(data->z_far + data->z_near) / 2;
 	m.m[3][3] = 1;
 	return (m);
-}
-
-t_vector_d	apply_projection_matrix(t_matrix_4 *m, t_vector_d *v,
-		double window_x, double window_y)
-{
-	t_vector_d	new;
-
-	new = matrix_times_vector(m, v);
-	new = vector_divide(&new, new.w);
-	new.x = (new.x + 1.0) * window_x / 2;
-	new.y = (new.y + 1.0) * window_y / 2;
-	return (new);
 }

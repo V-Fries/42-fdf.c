@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 07:43:51 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:18:34 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ t_matrix_4	matrix_times_matrix(t_matrix_4 *m1, t_matrix_4 *m2);
 
 t_matrix_4	get_prespective_proj_matrix(t_proj_m *data);
 t_matrix_4	get_iso_proj_matrix(t_proj_m *data);
-t_vector_d	apply_projection_matrix(t_matrix_4 *m, t_vector_d *v,
-		double window_x, double window_y);
 
 t_matrix_4	get_rotation_z_matrix(double rotation);
 t_matrix_4	get_rotation_y_matrix(double rotation);
