@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:12:35 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:43:20 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	init_piece_of_shit(t_fdf *fdf)
 				lowest_point = arr[y][x];
 			fdf->map.o_v_map[y][x].x = x - fdf->map.x_size / 2;
 			fdf->map.o_v_map[y][x].y = y - fdf->map.y_size / 2;
-			fdf->map.o_v_map[y][x].z = arr[y][x];
+			fdf->map.o_v_map[y][x].z = -arr[y][x];
 			fdf->map.o_v_map[y][x].w = 1.0;
 		}
 	}
