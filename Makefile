@@ -146,6 +146,6 @@ run:			all
 				./fdf
 
 run_debug:		debug
-				./fdf_debug
+				./fdf_debug maps/42.fdf
 
 .PHONY:			all debug clean fclean re re_debug run run_debug
