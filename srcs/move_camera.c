@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 06:31:11 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:15:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,24 @@ void	move_camera_y_x(t_fdf *fdf, int *keys)
 {
 	if (keys[KEY_W])
 	{
-		fdf->mats.trans.z += CAM_SPEED;
+		fdf->mats.trans.z -= CAM_SPEED;
+		if (fdf->mats.trans.z < 0)
+			fdf->mats.trans.z = 0;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_S])
 	{
-		fdf->mats.trans.z -= CAM_SPEED;
+		fdf->mats.trans.z += CAM_SPEED;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_D])
 	{
-		fdf->mats.trans.x += CAM_SPEED;
+		fdf->mats.trans.x -= CAM_SPEED;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_A])
 	{
-		fdf->mats.trans.x -= CAM_SPEED;
+		fdf->mats.trans.x += CAM_SPEED;
 		update_translation_matrix(&fdf->mats);
 	}
 }
@@ -47,12 +49,12 @@ void	move_camera_up_down_rotation_z(t_fdf *fdf, int *keys)
 {
 	if (keys[KEY_SPACE])
 	{
-		fdf->mats.trans.y -= CAM_SPEED;
+		fdf->mats.trans.y += CAM_SPEED;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_SHIFT])
 	{
-		fdf->mats.trans.y += CAM_SPEED;
+		fdf->mats.trans.y -= CAM_SPEED;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_E])

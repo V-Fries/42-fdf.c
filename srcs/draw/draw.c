@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 08:12:11 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:09:36 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_2d_point_i	get_2d_point_from_vector(t_vector_d vec)
 
 	new.x = vec.x + 0.5;
 	new.y = vec.y + 0.5;
+	// new.x = vec.x;
+	// new.y = vec.y;
 	return (new);
 }
 
@@ -61,6 +63,8 @@ static void	fill_m_v_map(t_fdf *fdf)
 		{
 			fdf->map.m_v_map[y][x] = matrix_times_vector(&fdf->mats.world,
 					&fdf->map.o_v_map[y][x]);
+			fdf->map.m_v_map[y][x] =  matrix_times_vector(&fdf->mats.proj.m,
+					&fdf->map.m_v_map[y][x]);
 		}
 	}
 }

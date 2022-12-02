@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 07:31:34 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 01:12:35 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ static int	init_piece_of_shit(t_fdf *fdf)
 
 static void	init_matrices(t_fdf *fdf, int lowest_point)
 {
-	fdf->mats.proj.z_near = 0.1f;
-	fdf->mats.proj.z_far = 1000.0f;
-	fdf->mats.proj.fov = 90.0f;
+	int	decal;
+
+	fdf->mats.proj.z_near = 0.1;
+	fdf->mats.proj.z_far = 1000.0;
+	fdf->mats.proj.fov = 90.0;
 	fdf->mats.proj.aspect_ratio = (double)WINDOW_Y / (double)WINDOW_X;
 	fdf->mats.proj.m = get_prespective_proj_matrix(&fdf->mats.proj);
 	fdf->mats.proj.type = 0;
-	fdf->mats.rot_z.rot = M_PI;
+	fdf->mats.rot_z.rot = 0.0;
 	fdf->mats.rot_z.m = get_rotation_z_matrix(fdf->mats.rot_z.rot);
 	fdf->mats.rot_x.rot = 0.0;
 	fdf->mats.rot_x.m = get_rotation_x_matrix(fdf->mats.rot_x.rot);
@@ -73,7 +75,11 @@ static void	init_matrices(t_fdf *fdf, int lowest_point)
 	fdf->mats.rot_y.m = get_rotation_y_matrix(fdf->mats.rot_y.rot);
 	fdf->mats.trans.x = 0.0;
 	fdf->mats.trans.y = 0.0;
-	fdf->mats.trans.z = lowest_point - 20.0;
+	if (fdf->map.x_size > fdf->map.y_size)
+		decal = fdf->map.x_size;
+	else
+		decal = fdf->map.y_size;
+	fdf->mats.trans.z = lowest_point + decal;
 	fdf->mats.trans.m = get_translation_matrix(fdf->mats.trans.x,
 			fdf->mats.trans.y, fdf->mats.trans.z);
 	fdf->mats.world = get_world_matrix(&fdf->mats.rot_z.m, &fdf->mats.rot_x.m,
