@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 04:51:41 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/03 18:18:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static void	fill_m_v_map(t_fdf *fdf)
 	int	x;
 
 	y = -1;
-	while (++y < 11)
+	while (++y < fdf->map.y_size)
 	{
 		x = -1;
-		while (++x < 19)
+		while (++x < fdf->map.x_size)
 		{
 			fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.world,
 					&fdf->map.o[y][x]);
@@ -79,10 +79,10 @@ static t_list	*get_lines(t_fdf *fdf)
 		x = -1;
 		while (++x < fdf->map.x_size)
 		{
-			if (x + 1 < 19)
+			if (x + 1 < fdf->map.x_size)
 				get_clipped_line(&fdf->mats.proj, &lines_to_draw,
 					fdf->map.m[y][x], fdf->map.m[y][x + 1]);
-			if (y + 1 < 11)
+			if (y + 1 < fdf->map.y_size)
 				get_clipped_line(&fdf->mats.proj, &lines_to_draw,
 					fdf->map.m[y][x], fdf->map.m[y + 1][x]);
 		}
