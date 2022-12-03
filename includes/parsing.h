@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 16:46:31 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 20:20:56 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/03 05:32:08 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include "ft_linked_list.h"
 
-typedef struct s_map
-{
-	int	**map;
-	int	**color;
-}	t_map;
-
-t_list	*get_splited_lines(char *map_file, int *list_len);
-
+double	parse_map(t_map *map, char *file_name);
 
 #endif
