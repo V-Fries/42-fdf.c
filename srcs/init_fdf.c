@@ -6,18 +6,19 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 02:14:50 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/02 17:48:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
-#include <limits.h>
+#include "parsing.h"
 #include <math.h>
 
+#include <limits.h>
 #include <stdlib.h>
 
-static int	parse_map(t_fdf *fdf, char *map_name)
+int	parse_map(t_fdf *fdf, char *map_name)
 {
 	int					highest_point;
 	int	arr[11][19] =	{{0,  0, 0,  0,  0,  0,  0,  0,  0, 0, 0, 0,  0,  0,  0,  0,  0,  0, 0},
@@ -57,6 +58,7 @@ static int	parse_map(t_fdf *fdf, char *map_name)
 	}
 	return (highest_point);
 }
+
 
 static void	init_matrices(t_fdf *fdf, int decal)
 {

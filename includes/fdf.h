@@ -23,8 +23,8 @@
 typedef struct s_map
 {
 	int			**i_map;
-	t_vector_d	**o_v_map;
-	t_vector_d	**m_v_map;
+	t_vector_d	**o;
+	t_vector_d	**m;
 	int			y_size;
 	int			x_size;
 }	t_map;

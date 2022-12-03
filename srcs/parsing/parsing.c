@@ -5,90 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 16:45:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/28 13:46:06 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/03 03:49:19 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "fdf.h"
+#include "vector.h"
+#include "ft_io.h"
+#include "ft_char.h"
 #include "ft_get_next_line.h"
-#include "get_splited_lines.h"
 #include "ft_string.h"
+#include "ft_linked_list.h"
+#include "ft_mem.h"
 #include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-
-// static void	clean_splited_lines(t_list **splited_lines)
-// {
-// 	t_list	*current;
-
-// 	current = *splited_lines;
-// 	while (current)
-// 	{
-// 		if (current->content[0] == ',')
-
-// 	}
-// }
-
-// t_map	*get_map(char *map_file)
-// {
-// 	t_map	*map;
-// 	t_list	*splited_lines;
-// 	int		list_len;
-
-// 	splited_lines = get_splited_lines(map_file, &list_len);
-// 	if (splited_lines == NULL)
-// 		return (NULL);
-// 	clean_splited_lines(&list_len);
-// 	map = init_map(*splited_lines);
-// }
-
-t_list	*get_lines(char *map_file, int *list_len)
+static t_list	*get_lines(int fd)
 {
-	int		fd;
-	char	*str;
+	char	*line;
+	char	**splited_line;
+	t_list	*new_elem;
 	t_list	*lines;
-	t_list	*lines_end;
-	t_list	*new_node;
 
-	*list_len = 0;
+	line = get_next_line(fd);
 	lines = NULL;
-	lines_end = NULL;
-	fd = open(map_file, O_RDONLY);
-	str = get_next_line(fd);
-	if (str == NULL)
-		return (close(fd), NULL);
-	while (str)
+	while (line)
 	{
-		new_node = ft_lstnew(str);
-		if (new_node == NULL)
-			return (close(fd), ft_lstclear(&lines, &free), free(str), NULL);
-		ft_lstadd_back(&lines_end, new_node);
-		if (lines == NULL)
-			lines = lines_end;
-		(*list_len)++;
-		str = get_next_line(fd);
+		splited_line = ft_split_set(line, " \n");
+		free(line);
+		if (splited_line == NULL)
+			return (ft_lstclear(&lines, &ft_free_split), NULL);
+		new_elem = ft_lstnew(splited_line);
+		if (new_elem == NULL)
+			return (ft_lstclear(&lines, &ft_free_split),
+				ft_free_split(splited_line), NULL);
+		ft_lstadd_front(&lines, new_elem);
+		line = get_next_line(fd);
 	}
-	close(fd);
 	return (lines);
 }
 
-t_map	*init_map(int nb_of_lines)
+static void	free_map_o(t_vector_d **map_o)
 {
-	t_map	*map;
+	size_t	i;
 
-	map = malloc(sizeof(t_map));
-	if (map == NULL)
-		return (NULL);
-	map.map
+	i = -1;
+	while (map_o[++i])
+		free(map_o[i]);
+	free(map_o);
 }
 
-t_map	*get_map(char *map_file)
+static t_vector_d	**get_map_o(t_map *map, t_list *lines)
 {
-	t_list	*lines;
-	int		nb_of_lines;
+	t_vector_d	**ret;
+	size_t		y;
 
-	lines = get_lines(map_file, &nb_of_lines);
 	if (lines == NULL)
 		return (NULL);
+	map->y_size = ft_lstsize(lines);
+	ret = ft_calloc(sizeof(t_vector_d *), map->y_size);
+	if (ret == NULL)
+		return (NULL);
+	map->x_size = ft_split_size(lines->content);
+	y = map->y_size;
+	while (y--)
+	{
+		if (lines == NULL)
+			return (ft_lstclear(&lines, &ft_free_split), free_map_o(ret), NULL);
+		ret[y] = malloc(sizeof(t_vector_d) * map->x_size);
+		if (ret[y] == NULL)
+			return (ft_lstclear(&lines, &ft_free_split),
+				free_map_o(ret), NULL);
+		init_ret_y(ret + y, lines);
+		if (ret[y][0].x < 0)
+			return (ft_lstclear(&lines, &ft_free_split),
+				free_map_o(ret), NULL);
+		lines = ft_lst_get_next_free_current(lines, &ft_free_split);
+	}
+	if (lines != NULL)
+		return (ft_lstclear(&lines, &ft_free_split), free_map_o(ret), NULL);
+	return (lines);
+}
 
+int	parse_map(t_map *map, char *file_name)
+{
+	int	fd;
+
+	fd = open(file_name, O_RDONLY);
+	map->o = get_map_o(get_lines(fd));
+	close(fd);
+	if (map->o == NULL)
+		return (ft_putstr("ERROR: Parsing failed.\n"), 0);
 }

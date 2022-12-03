@@ -22,6 +22,7 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 C_FILES =		draw/draw.c							\
 				draw/get_clipped_lines.c			\
 				draw/line_drawing.c					\
+				parsing/parsing.c	\
 				init_fdf.c			\
 				move_camera.c		\
 				render_frame.c		\
