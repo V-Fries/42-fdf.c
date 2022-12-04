@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 05:07:58 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 07:33:35 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 09:27:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_keys
 	int		keys_pressed;
 }	t_keys;
 
-enum e_keys
+enum
 {
 	KEY_ESC = 53,
 	KEY_W = 13,
@@ -37,6 +37,7 @@ enum e_keys
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_P = 35,
+	KEY_V = 9,
 };
 
 enum

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_clipped_lines.c                                :+:      :+:    :+:   */
+/*   draw_clipped_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/04 05:06:37 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 09:38:29 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_vector_d	get_fixed_vector(t_proj_m *proj,
 }
 
 static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
-										t_img *img)
+										t_fdf *fdf)
 {
 	t_line_point	start_line;
 	t_line_point	end_line;
@@ -41,20 +41,26 @@ static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
 	end = vector_divide(&end, end.w);
 	end.x = (end.x + 1.0) * WINDOW_X / 2;
 	end.y = (end.y + 1.0) * WINDOW_Y / 2;
+	if (fdf->view_mode == VIEW_POINTS)
+	{
+		put_pixel_on_img(&fdf->img, start.y, start.x, 0xFFFFFF);
+		put_pixel_on_img(&fdf->img, end.y, end.x, 0xFFFFFF);
+		return ;
+	}
 	start_line.x = start.x + 0.5;
 	start_line.y = start.y + 0.5;
 	start_line.color = 0xFFFFFF;
 	end_line.x = end.x + 0.5;
 	end_line.y = end.y + 0.5;
 	end_line.color = 0xFFFFFF;
-	draw_line(start_line, end_line, img);
+	draw_line(start_line, end_line, &fdf->img);
 }
 
 //	If vector.w is below z_near, it means the vector is behind the screen
 //	the vector need to be cliped at the position it would have at the
 //	screen edge
 void	draw_clipped_line(t_proj_m *proj,
-		t_vector_d start, t_vector_d end, t_img *img)
+		t_vector_d start, t_vector_d end, t_fdf *fdf)
 {
 	if (start.w < proj->z_near && end.w < proj->z_near)
 		return ;
@@ -62,5 +68,5 @@ void	draw_clipped_line(t_proj_m *proj,
 		end = get_fixed_vector(proj, start, end);
 	else if (start.w < proj->z_near)
 		start = get_fixed_vector(proj, end, start);
-	draw_line_with_fixed_vectors(start, end, img);
+	draw_line_with_fixed_vectors(start, end, fdf);
 }

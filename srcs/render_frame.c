@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:10:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 07:29:16 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 09:39:15 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static void	update_proj_mat(t_proj_m *proj, int *keys)
 	keys[KEY_P] = 0;
 }
 
+static void	change_view(t_fdf *fdf)
+{
+	if (fdf->view_mode == VIEW_POINTS)
+		fdf->view_mode = VIEW_LINES;
+	else
+		fdf->view_mode = VIEW_POINTS;
+	fdf->keys.keys[KEY_V] = 0;
+}
+
 static void	deal_key(t_fdf *fdf)
 {
 	int	*keys;
@@ -44,6 +53,8 @@ static void	deal_key(t_fdf *fdf)
 		move_camera_rotation(fdf, keys);
 	if (keys[KEY_P])
 		update_proj_mat(&fdf->mats.proj, keys);
+	if (keys[KEY_V])
+		change_view(fdf);
 }
 
 int	render_frame(t_fdf *fdf)

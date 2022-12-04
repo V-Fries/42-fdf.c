@@ -13,12 +13,15 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WINDOW_X 1400
-# define WINDOW_Y 800
-
 # include "mlx_tools.h"
 # include "matrices.h"
 # include "keys.h"
+
+# define WINDOW_X 1400
+# define WINDOW_Y 800
+
+# define VIEW_POINTS 1
+# define VIEW_LINES 0
 
 typedef struct s_map
 {
@@ -34,6 +37,7 @@ typedef struct s_fdf
 	t_win		win;
 	t_img		img;
 	t_keys		keys;
+	char		view_mode;
 	t_map		map;
 	t_matrices	mats;
 }	t_fdf;

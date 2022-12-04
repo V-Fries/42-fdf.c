@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/04 05:07:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 09:33:05 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static void	draw_lines(t_fdf *fdf)
 		{
 			if (x + 1 < fdf->map.x_size)
 				draw_clipped_line(&fdf->mats.proj,
-					fdf->map.m[y][x], fdf->map.m[y][x + 1], &fdf->img);
+					fdf->map.m[y][x], fdf->map.m[y][x + 1], fdf);
 			if (y + 1 < fdf->map.y_size)
 				draw_clipped_line(&fdf->mats.proj,
-					fdf->map.m[y][x], fdf->map.m[y + 1][x], &fdf->img);
+					fdf->map.m[y][x], fdf->map.m[y + 1][x], fdf);
 		}
 	}
 }
