@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:37:27 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 05:06:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
 #include "fdf.h"
+#include "lines.h"
 #include <stdlib.h>
 
 // v1 is assumed to be on the screen !
@@ -29,28 +29,32 @@ static t_vector_d	get_fixed_vector(t_proj_m *proj,
 	return (new);
 }
 
-static void	add_line_to_draw(t_list **lines_to_draw,
-			t_vector_d start, t_vector_d end)
+static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
+										t_img *img)
 {
-	t_vector_d	*ret;
+	t_line_point	start_line;
+	t_line_point	end_line;
 
-	ret = malloc(sizeof(t_vector_d) * 2);
-	if (ret == NULL)
-		return ;
-	ret[0] = vector_divide(&start, start.w);
-	ret[0].x = (ret[0].x + 1.0) * WINDOW_X / 2;
-	ret[0].y = (ret[0].y + 1.0) * WINDOW_Y / 2;
-	ret[1] = vector_divide(&end, end.w);
-	ret[1].x = (ret[1].x + 1.0) * WINDOW_X / 2;
-	ret[1].y = (ret[1].y + 1.0) * WINDOW_Y / 2;
-	ft_lstadd_front(lines_to_draw, ft_lstnew(ret));
+	start = vector_divide(&start, start.w);
+	start.x = (start.x + 1.0) * WINDOW_X / 2;
+	start.y = (start.y + 1.0) * WINDOW_Y / 2;
+	end = vector_divide(&end, end.w);
+	end.x = (end.x + 1.0) * WINDOW_X / 2;
+	end.y = (end.y + 1.0) * WINDOW_Y / 2;
+	start_line.x = start.x + 0.5;
+	start_line.y = start.y + 0.5;
+	start_line.color = 0xFFFFFF;
+	end_line.x = end.x + 0.5;
+	end_line.y = end.y + 0.5;
+	end_line.color = 0xFFFFFF;
+	draw_line(start_line, end_line, img);
 }
 
 //	If vector.w is below z_near, it means the vector is behind the screen
 //	the vector need to be cliped at the position it would have at the
 //	screen edge
-void	get_clipped_line(t_proj_m *proj, t_list **lines_to_draw,
-		t_vector_d start, t_vector_d end)
+void	draw_clipped_line(t_proj_m *proj,
+		t_vector_d start, t_vector_d end, t_img *img)
 {
 	if (start.w < proj->z_near && end.w < proj->z_near)
 		return ;
@@ -58,5 +62,5 @@ void	get_clipped_line(t_proj_m *proj, t_list **lines_to_draw,
 		end = get_fixed_vector(proj, start, end);
 	else if (start.w < proj->z_near)
 		start = get_fixed_vector(proj, end, start);
-	return (add_line_to_draw(lines_to_draw, start, end));
+	draw_line_with_fixed_vectors(start, end, img);
 }
