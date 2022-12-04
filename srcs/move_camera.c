@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 18:04:42 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/03 19:49:14 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	move_camera_y_x(t_fdf *fdf, int *keys)
 	if (keys[KEY_W])
 	{
 		fdf->mats.trans.z -= CAM_SPEED;
-		if (fdf->mats.trans.z < 0)
-			fdf->mats.trans.z = 0;
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_S])

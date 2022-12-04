@@ -3,23 +3,30 @@ NAME =			libslx.a
 NAME_DEBUG =	libslx_debug.a
 
 
-HEADERS_NO_PATH =	keys.h					\
-					matrices.h				\
-					mlx_tools.h				\
-					points.h				\
-					vector.h				\
+HEADERS_NO_PATH =	keys.h		\
+					lines.h		\
+					matrices.h	\
+					mlx_tools.h	\
+					points.h	\
+					vector.h
 
-HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}
+HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}	\
+					srcs/utils/slx_utils.h
 
 
-C_FILES =		matrices/matrix_multiplication.c		\
-				matrices/projection_matrix.c			\
-				matrices/rotation_matrices.c			\
-				matrices/translation_matrix.c			\
-				matrices/world_matrix.c					\
+C_FILES =		lines/draw_line.c					\
+\
+				matrices/matrix_multiplication.c	\
+				matrices/projection_matrix.c		\
+				matrices/rotation_matrices.c		\
+				matrices/translation_matrix.c		\
+				matrices/world_matrix.c				\
+\
 				utils/utils.c	\
+\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\
+\
 				keys.c	\
 				mlx_tools.c
 

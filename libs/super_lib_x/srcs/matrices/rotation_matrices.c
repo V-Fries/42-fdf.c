@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 19:42:41 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/03 21:27:50 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
-#include "utils.h"
+#include "slx_utils.h"
 #include <stddef.h>
 #include <math.h>
 
@@ -27,7 +27,7 @@ t_matrix_4	get_rotation_x_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
+	slx_bzero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = 1.0;
 	m.m[1][1] = cos(rotation * 0.5);
 	m.m[1][2] = sin(rotation * 0.5);
@@ -49,7 +49,7 @@ t_matrix_4	get_rotation_y_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
+	slx_bzero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = cos(rotation);
 	m.m[0][2] = sin(rotation);
 	m.m[2][0] = -m.m[0][2];
@@ -71,7 +71,7 @@ t_matrix_4	get_rotation_z_matrix(double rotation)
 {
 	t_matrix_4	m;
 
-	mlx_tools_b_zero(&m, sizeof(t_matrix_4));
+	slx_bzero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = cos(rotation);
 	m.m[0][1] = sin(rotation);
 	m.m[1][0] = -m.m[0][1];

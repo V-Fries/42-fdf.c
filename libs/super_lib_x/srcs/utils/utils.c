@@ -6,14 +6,22 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:51:26 by vfries            #+#    #+#             */
-/*   Updated: 2022/11/30 18:52:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/03 21:26:39 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	mlx_tools_b_zero(void *ptr, size_t len)
+void	slx_bzero(void *ptr, size_t len)
 {
 	while (len-- > 0)
 		*(unsigned char *)ptr++ = (unsigned char)0;
+}
+
+
+int	slx_abs(int i)
+{
+	if (i < 0)
+		return (-i);
+	return (i);
 }

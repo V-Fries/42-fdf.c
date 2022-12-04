@@ -6,25 +6,36 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 18:18:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/04 01:57:14 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "points.h"
+#include "lines.h"
+//#include "points.h"
 #include "draw.h"
 #include <stdlib.h>
 
 #define BACK_GROUND_COLOR 0x000000
 
-static t_2d_point_i	get_2d_point_from_vector(t_vector_d vec)
+static t_line_point	get_line_point(t_vector_d vec)
 {
-	t_2d_point_i	new;
+	t_line_point	new;
 
 	new.x = vec.x + 0.5;
 	new.y = vec.y + 0.5;
+	new.color = 0xFFFFFF;
 	return (new);
 }
+
+// static t_2d_point_i	get_2d_point(t_vector_d vec)
+// {
+// 	t_2d_point_i	new;
+
+// 	new.x = vec.x + 0.5;
+// 	new.y = vec.y + 0.5;
+// 	return (new);
+// }
 
 static void	draw_lines(t_fdf *fdf, t_list *vectors)
 {
@@ -37,9 +48,12 @@ static void	draw_lines(t_fdf *fdf, t_list *vectors)
 			vectors = vectors->next;
 			continue ;
 		}
-		draw_line(&fdf->img,
-			get_2d_point_from_vector(((t_vector_d *)(vectors->content))[0]),
-			get_2d_point_from_vector(((t_vector_d *)(vectors->content))[1]));
+		draw_line(get_line_point(((t_vector_d *)(vectors->content))[0]),
+			get_line_point(((t_vector_d *)(vectors->content))[1]),
+			&fdf->img, 0);
+		// draw_line(&fdf->img,
+		// 	get_2d_point(((t_vector_d *)(vectors->content))[0]),
+		// 	get_2d_point(((t_vector_d *)(vectors->content))[1]));
 		free(vectors->content);
 		free_me = vectors;
 		vectors = vectors->next;
