@@ -14,95 +14,103 @@
 #include "slx_utils.h"
 #include "mlx_tools.h"
 
-static int	get_color(t_line_point start, t_line_point end)
-{
-	(void)start;
-	(void)end;
-	return (0xFFFFFF);
-}
+// static int	get_color(t_line_point start, t_line_point end)
+// {
+// 	(void)start;
+// 	(void)end;
+// 	return (0xFFFFFF);
+// }
 
-static void	get_incr(t_line_point start, t_line_point end,
-						int *x_incr, int *y_incr)
+typedef struct s_bresenham
 {
-	if (start.x > end.x)
-		*x_incr = -1;
-	else
-		*x_incr = 1;
-	if (start.y > end.y)
-		*y_incr = -1;
-	else
-		*y_incr = 1;
-}
-
-static void	draw_line_high_slope(t_line_point start, t_line_point end,
-		t_img *img, int color)
-{
-	int	error;
+	int	error_x;
+	int	error_y;
 	int	diff_x;
 	int	diff_y;
+	int	starting_error_x;
+	int	starting_error_y;
 	int	x_incr;
 	int	y_incr;
+}	t_bresenham;
 
-	get_incr(start, end, &x_incr, &y_incr);
-	error = slx_abs(end.x - start.x);
-	diff_x = 2 * error;
-	diff_y = 2 * slx_abs(end.y - start.y);
-	while (start.y < end.y)
+static void	draw_low_slope(t_line_point start,
+			t_bresenham params, t_img *img)
+{
+	int	i;
+
+	i = -1;
+	while (++i <= params.starting_error_x)
 	{
-		if (color)
-			put_pixel_on_img(img, start.y, start.x, get_color(start, end));
-		else
-			put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
-		start.y += y_incr;
-		error -= diff_x;
-		if (error < 0)
+		put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
+		start.x += params.x_incr;
+		params.error_x -= params.diff_y;
+		if (params.error_x < 0)
 		{
-			start.x += x_incr;
-			error += diff_y;
+			start.y += params.y_incr;
+			params.error_x += params.diff_x;
 		}
 	}
 }
 
-static void	draw_line_low_slope(t_line_point start, t_line_point end,
-		t_img *img, int color)
+static void	draw_high_slope(t_line_point start,
+			t_bresenham params, t_img *img)
 {
-	int	error;
-	int	diff_x;
-	int	diff_y;
-	int	x_incr;
-	int	y_incr;
+	int	i;
 
-	get_incr(start, end, &x_incr, &y_incr);
-	error = slx_abs(end.x - start.x);
-	diff_x = 2 * error;
-	diff_y = 2 * slx_abs(end.y - start.y);
-	while (start.x < end.x)
+	i = -1;
+	while (++i <= params.starting_error_y)
 	{
-		if (color)
-			put_pixel_on_img(img, start.y, start.x, get_color(start, end));
-		else
-			put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
-		start.x += x_incr;
-		error -= diff_y;
-		if (error < 0)
+		put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
+		start.y += params.y_incr;
+		params.error_y -= params.diff_x;
+		if (params.error_y < 0)
 		{
-			start.y += y_incr;
-			error += diff_x;
+			start.x += params.x_incr;
+			params.error_y += params.diff_y;
 		}
 	}
 }
 
-void	draw_line(t_line_point start, t_line_point end,
-		t_img *img, int color)
+static void	draw_straight_line(t_line_point start, t_line_point end, t_img *img)
 {
-	double	coef;
+	if (start.x == end.x)
+	{
+		if (start.y > end.y)
+			return (draw_straight_line(end, start, img));
+		while (start.y < end.y)
+			put_pixel_on_img(img, start.y++, start.x, 0xFFFFFF);
+	}
+	else
+	{
+		if (start.x > end.x)
+			return (draw_straight_line(end, start, img));
+		while (start.x < end.x)
+			put_pixel_on_img(img, start.y, start.x++, 0xFFFFFF);
+	}
+}
 
+void	draw_line(t_line_point start, t_line_point end, t_img *img)
+{
+	t_bresenham	params;
+
+	if (start.x == end.x || start.y == end.y)
+		return (draw_straight_line(start, end, img));
+	params.error_x = slx_abs(end.x - start.x);
+	params.error_y = slx_abs(end.y - start.y);
+	params.diff_x = 2 * params.error_x;
+	params.diff_y = 2 * params.error_y;
+	params.starting_error_x = params.error_x;
+	params.starting_error_y = params.error_y;
 	if (start.x > end.x)
-		return (draw_line(end, start, img, color));
-	coef = (double)(end.y - start.y) / (double)(end.x - start.x);
-	if (coef > -0.5 && coef < 0.5)
-		return (draw_line_low_slope(start, end, img, color));
+		params.x_incr = -1;
+	else
+		params.x_incr = 1;
 	if (start.y > end.y)
-		return (draw_line_high_slope(end, start, img, color));
-	draw_line_high_slope(start, end, img, color);
+		params.y_incr = -1;
+	else
+		params.y_incr = 1;
+	if (params.starting_error_x > params.starting_error_y)
+		draw_low_slope(start, params, img);
+	else if (params.starting_error_x < params.starting_error_y)
+		draw_high_slope(start, params, img);
 }
