@@ -144,9 +144,9 @@ ${DIR_OBJS}: Makefile
 					@# Executes the script (Creates all folders)
 
 run:			all
-				./fdf
+				./fdf maps/elem-fract.fdf
 
 run_debug:		debug
-				./fdf_debug maps/42.fdf
+				./fdf_debug maps/elem-fract.fdf
 
 .PHONY:			all debug clean fclean re re_debug run run_debug
