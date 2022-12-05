@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:37:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 03:31:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/05 23:33:54 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	put_pixel_on_img(t_img *img, int y, int x, int color)
 {
 	char	*dst;
 
-	if (y < 0 || y >= img->y_size || x < 0 || x >= img->x_size)
-		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }

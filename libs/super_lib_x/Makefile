@@ -14,7 +14,9 @@ HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}	\
 					srcs/utils/slx_utils.h
 
 
-C_FILES =		lines/draw_line.c					\
+C_FILES =		lines/clip_line.c			\
+				lines/create_t_line_point.c	\
+				lines/draw_line.c			\
 \
 				matrices/matrix_multiplication.c	\
 				matrices/projection_matrix.c		\

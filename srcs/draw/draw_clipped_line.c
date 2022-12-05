@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/04 09:38:29 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/05 23:54:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
 	t_line_point	end_line;
 
 	start = vector_divide(&start, start.w);
-	start.x = (start.x + 1.0) * WINDOW_X / 2;
-	start.y = (start.y + 1.0) * WINDOW_Y / 2;
+	start.x = (start.x + 1.0) * WINDOW_X / 2 + 0.5;
+	start.y = (start.y + 1.0) * WINDOW_Y / 2 + 0.5;
 	end = vector_divide(&end, end.w);
-	end.x = (end.x + 1.0) * WINDOW_X / 2;
-	end.y = (end.y + 1.0) * WINDOW_Y / 2;
+	end.x = (end.x + 1.0) * WINDOW_X / 2 + 0.5;
+	end.y = (end.y + 1.0) * WINDOW_Y / 2 + 0.5;
 	if (fdf->view_mode == VIEW_POINTS)
 	{
-		put_pixel_on_img(&fdf->img, start.y, start.x, 0xFFFFFF);
-		put_pixel_on_img(&fdf->img, end.y, end.x, 0xFFFFFF);
+		if (start.y >= 0 && start.y < fdf->img.y_size
+			&& start.x >= 0 && start.x < fdf->img.x_size)
+			put_pixel_on_img(&fdf->img, start.y, start.x, 0xFFFFFF);
+		if (end.y >= 0 && end.y < fdf->img.y_size
+			&& end.x >= 0 && end.x < fdf->img.x_size)
+			put_pixel_on_img(&fdf->img, end.y, end.x, 0xFFFFFF);
 		return ;
 	}
-	start_line.x = start.x + 0.5;
-	start_line.y = start.y + 0.5;
-	start_line.color = 0xFFFFFF;
-	end_line.x = end.x + 0.5;
-	end_line.y = end.y + 0.5;
-	end_line.color = 0xFFFFFF;
+	start_line = create_t_line_point(start.x, start.y, 0xFFFFFF);
+	end_line = create_t_line_point(end.x, end.y, 0xFFFFFF);
 	draw_line(start_line, end_line, &fdf->img);
 }
 
