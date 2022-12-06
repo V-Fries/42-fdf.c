@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 05:36:16 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 02:50:51 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ static void	free_map_o(t_vector_d **map_o)
 
 static void	get_map_o(t_map *map, t_list *lines)
 {
-	int			y;
-	int			x;
-	t_list		*free_me;
+	int	y;
+	int	x;
 
 	map->x_size = ft_split_size(lines->content);
 	map->y_size = ft_lstsize(lines);
@@ -69,7 +68,7 @@ static void	get_map_o(t_map *map, t_list *lines)
 	if (map->o == NULL)
 		return (ft_lstclear(&lines, &ft_free_split), map->o = NULL, (void)0);
 	y = map->y_size;
-	while (y--)
+	while (y-- > 0)
 	{
 		map->o[y] = malloc(sizeof(t_vector_d) * map->x_size);
 		if (map->o[y] == NULL)
@@ -77,12 +76,15 @@ static void	get_map_o(t_map *map, t_list *lines)
 				map->o = NULL, (void)0);
 		x = -1;
 		while (++x < map->x_size)
+		{
+			if (((char **)lines->content)[x] == NULL)
+				return (ft_lstclear(&lines, &ft_free_split), free_map_o(map->o),
+					map->o = NULL, (void)0);
 			map->o[y][x] = create_vector(x - map->x_size / 2,
 					y - map->y_size / 2,
 					-ft_atoll(((char **)lines->content)[x]), 1.0);
-		free_me = lines;
-		lines = lines->next;
-		ft_lstdelone(free_me, &ft_free_split);
+		}
+		lines = ft_lst_get_next_free_current(lines, &ft_free_split);
 	}
 }
 
