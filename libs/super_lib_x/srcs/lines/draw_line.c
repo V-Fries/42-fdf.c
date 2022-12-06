@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 19:37:46 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/05 23:06:23 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 18:05:34 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ bool	line_clipping(t_line_point *start, t_line_point *end, t_img *img);
 
 typedef struct s_bresenham
 {
-	int	error_x;
-	int	error_y;
-	int	diff_x;
-	int	diff_y;
-	int	starting_error_x;
-	int	starting_error_y;
-	int	x_incr;
-	int	y_incr;
+	int		error_x;
+	int		error_y;
+	int		diff_x;
+	int		diff_y;
+	int		starting_error_x;
+	int		starting_error_y;
+	int		x_incr;
+	int		y_incr;
+	int		color;
+	double	depth;
 }	t_bresenham;
 
 static void	draw_low_slope(t_line_point start,
@@ -44,7 +46,7 @@ static void	draw_low_slope(t_line_point start,
 	i = -1;
 	while (++i <= params.starting_error_x)
 	{
-		put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
+		put_pixel_on_img(img, start.y, start.x, params.color, params.depth);
 		start.x += params.x_incr;
 		params.error_x -= params.diff_y;
 		if (params.error_x < 0)
@@ -63,7 +65,7 @@ static void	draw_high_slope(t_line_point start,
 	i = -1;
 	while (++i <= params.starting_error_y)
 	{
-		put_pixel_on_img(img, start.y, start.x, 0xFFFFFF);
+		put_pixel_on_img(img, start.y, start.x, params.color, params.depth);
 		start.y += params.y_incr;
 		params.error_y -= params.diff_x;
 		if (params.error_y < 0)
@@ -81,14 +83,14 @@ static void	draw_straight_line(t_line_point start, t_line_point end, t_img *img)
 		if (start.y > end.y)
 			return (draw_straight_line(end, start, img));
 		while (start.y <= end.y)
-			put_pixel_on_img(img, start.y++, start.x, 0xFFFFFF);
+			put_pixel_on_img(img, start.y++, start.x, end.color, end.depth);
 	}
 	else
 	{
 		if (start.x > end.x)
 			return (draw_straight_line(end, start, img));
 		while (start.x <= end.x)
-			put_pixel_on_img(img, start.y, start.x++, 0xFFFFFF);
+			put_pixel_on_img(img, start.y, start.x++, end.color, end.depth);
 	}
 }
 
@@ -112,6 +114,8 @@ void	draw_line(t_line_point start, t_line_point end, t_img *img)
 	params.y_incr = 1;
 	if (start.y > end.y)
 		params.y_incr = -1;
+	params.color = end.color;
+	params.depth = end.depth;
 	if (params.starting_error_x > params.starting_error_y)
 		draw_low_slope(start, params, img);
 	else if (params.starting_error_x < params.starting_error_y)

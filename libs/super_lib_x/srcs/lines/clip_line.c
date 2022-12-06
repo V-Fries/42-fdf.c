@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:54:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 00:54:40 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 18:06:45 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 #define RIGHT 2  // 0010
 #define BOTTOM 4 // 0100
 #define TOP 8    // 1000
+
+typedef struct s_clip_line_params
+{
+	t_img	*img;
+	int		color;
+	double	depth;
+}	t_clip_line_params;
 
 static uint8_t	get_region(t_line_point point, t_img *img)
 {
@@ -38,27 +45,43 @@ static uint8_t	get_region(t_line_point point, t_img *img)
 }
 
 static t_line_point	clip_line(t_line_point p1, t_line_point p2,
-					uint8_t tested_region, t_img *img)
+					uint8_t tested_region, t_clip_line_params params)
 {
 	if (tested_region & TOP)
 		return (create_t_line_point(
-				p1.x + (p2.x - p1.x) * (img->y_size - 1 - p1.y) / (p2.y - p1.y),
-				img->y_size - 1,
-				0xFFFFFF));
+				p1.x + (p2.x - p1.x)
+				* (params.img->y_size - 1 - p1.y) / (p2.y - p1.y),
+				params.img->y_size - 1,
+				params.color,
+				params.depth));
 	if (tested_region & BOTTOM)
 		return (create_t_line_point(
 				p1.x + (p2.x - p1.x) * (.0 - p1.y) / (p2.y - p1.y),
 				0.0,
-				0xFFFFFF));
+				params.color,
+				params.depth));
 	if (tested_region & RIGHT)
 		return (create_t_line_point(
-				img->x_size - 1,
-				p1.y + (p2.y - p1.y) * (img->x_size - 1 - p1.x) / (p2.x - p1.x),
-				0xFFFFFF));
+				params.img->x_size - 1,
+				p1.y + (p2.y - p1.y)
+				* (params.img->x_size - 1 - p1.x) / (p2.x - p1.x),
+				params.color,
+				params.depth));
 	return (create_t_line_point(
 			0.0,
 			p1.y + (p2.y - p1.y) * (.0 - p1.x) / (p2.x - p1.x),
-			0xFFFFFF));
+			params.color,
+			params.depth));
+}
+
+static t_clip_line_params	create_params(t_img *img, int color, double depth)
+{
+	t_clip_line_params	new;
+
+	new.img = img;
+	new.color = color;
+	new.depth = depth;
+	return (new);
 }
 
 // https://en.wikipedia.org/wiki/Cohen%E2%80%93Sutherland_algorithm
@@ -76,8 +99,10 @@ bool	line_clipping(t_line_point *start, t_line_point *end, t_img *img)
 		else if (start_region & end_region)
 			return (false);
 		else if (start_region > end_region)
-			*start = clip_line(*start, *end, start_region, img);
+			*start = clip_line(*start, *end, start_region,
+					create_params(img, start->color, start->depth));
 		else
-			*end = clip_line(*start, *end, end_region, img);
+			*end = clip_line(*start, *end, end_region,
+					create_params(img, end->color, end->depth));
 	}
 }

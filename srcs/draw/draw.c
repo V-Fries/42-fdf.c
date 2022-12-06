@@ -6,14 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/04 09:33:05 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 19:26:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "draw.h"
-
-#define BACK_GROUND_COLOR 0x000000
 
 static void	fill_m_v_map(t_fdf *fdf)
 {
@@ -34,6 +32,18 @@ static void	fill_m_v_map(t_fdf *fdf)
 	}
 }
 
+static int	get_color(double altitude_1, double altitude_2)
+{
+	int	color;
+
+	if (altitude_1 > altitude_2)
+		color = altitude_1 * 512;
+	else
+		color = altitude_2 * 512;
+	((unsigned char *)&color)[3] = 0;
+	return (color);
+}
+
 static void	draw_lines(t_fdf *fdf)
 {
 	int		y;
@@ -46,27 +56,18 @@ static void	draw_lines(t_fdf *fdf)
 		while (++x < fdf->map.x_size)
 		{
 			if (x + 1 < fdf->map.x_size)
-				draw_clipped_line(&fdf->mats.proj,
-					fdf->map.m[y][x], fdf->map.m[y][x + 1], fdf);
+				draw_clipped_line(fdf->map.m[y][x], fdf->map.m[y][x + 1],
+					fdf, get_color(fdf->map.o[y][x].z, fdf->map.o[y][x + 1].z));
 			if (y + 1 < fdf->map.y_size)
-				draw_clipped_line(&fdf->mats.proj,
-					fdf->map.m[y][x], fdf->map.m[y + 1][x], fdf);
+				draw_clipped_line(fdf->map.m[y][x], fdf->map.m[y + 1][x],
+					fdf, get_color(fdf->map.o[y][x].z, fdf->map.o[y + 1][x].z));
 		}
 	}
 }
 
 void	draw_fdf(t_fdf *fdf)
 {
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < fdf->img.y_size)
-	{
-		x = -1;
-		while (++x < fdf->img.x_size)
-			put_pixel_on_img(&fdf->img, y, x, BACK_GROUND_COLOR);
-	}
+	reset_img(&fdf->img, 0x000000);
 	fill_m_v_map(fdf);
 	draw_lines(fdf);
 	put_img(&fdf->img, &fdf->win);

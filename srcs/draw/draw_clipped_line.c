@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/05 23:54:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 18:27:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_vector_d	get_fixed_vector(t_proj_m *proj,
 }
 
 static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
-										t_fdf *fdf)
+										t_fdf *fdf, int color)
 {
 	t_line_point	start_line;
 	t_line_point	end_line;
@@ -41,32 +41,32 @@ static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
 	end = vector_divide(&end, end.w);
 	end.x = (end.x + 1.0) * WINDOW_X / 2 + 0.5;
 	end.y = (end.y + 1.0) * WINDOW_Y / 2 + 0.5;
-	if (fdf->view_mode == VIEW_POINTS)
+	if (fdf->view_mode == VIEW_LINES)
 	{
-		if (start.y >= 0 && start.y < fdf->img.y_size
-			&& start.x >= 0 && start.x < fdf->img.x_size)
-			put_pixel_on_img(&fdf->img, start.y, start.x, 0xFFFFFF);
-		if (end.y >= 0 && end.y < fdf->img.y_size
-			&& end.x >= 0 && end.x < fdf->img.x_size)
-			put_pixel_on_img(&fdf->img, end.y, end.x, 0xFFFFFF);
+		start_line = create_t_line_point(start.x, start.y, color, end.z >= start.z ? end.z : start.z);
+		end_line = create_t_line_point(end.x, end.y, color, end.z >= start.z ? end.z : start.z);
+		draw_line(start_line, end_line, &fdf->img);
 		return ;
 	}
-	start_line = create_t_line_point(start.x, start.y, 0xFFFFFF);
-	end_line = create_t_line_point(end.x, end.y, 0xFFFFFF);
-	draw_line(start_line, end_line, &fdf->img);
+	if (start.y >= 0 && start.y < fdf->img.y_size
+		&& start.x >= 0 && start.x < fdf->img.x_size)
+		put_pixel_on_img(&fdf->img, start.y, start.x, color, end.z >= start.z ? end.z : start.z);
+	if (end.y >= 0 && end.y < fdf->img.y_size
+		&& end.x >= 0 && end.x < fdf->img.x_size)
+		put_pixel_on_img(&fdf->img, end.y, end.x, color, end.z >= start.z ? end.z : start.z);
 }
 
 //	If vector.w is below z_near, it means the vector is behind the screen
 //	the vector need to be cliped at the position it would have at the
 //	screen edge
-void	draw_clipped_line(t_proj_m *proj,
-		t_vector_d start, t_vector_d end, t_fdf *fdf)
+void	draw_clipped_line(t_vector_d start, t_vector_d end, t_fdf *fdf,
+							int color)
 {
-	if (start.w < proj->z_near && end.w < proj->z_near)
+	if (start.w < fdf->mats.proj.z_near && end.w < fdf->mats.proj.z_near)
 		return ;
-	if (end.w < proj->z_near)
-		end = get_fixed_vector(proj, start, end);
-	else if (start.w < proj->z_near)
-		start = get_fixed_vector(proj, end, start);
-	draw_line_with_fixed_vectors(start, end, fdf);
+	if (end.w < fdf->mats.proj.z_near)
+		end = get_fixed_vector(&fdf->mats.proj, start, end);
+	else if (start.w < fdf->mats.proj.z_near)
+		start = get_fixed_vector(&fdf->mats.proj, end, start);
+	draw_line_with_fixed_vectors(start, end, fdf, color);
 }
