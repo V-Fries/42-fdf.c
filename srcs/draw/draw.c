@@ -6,14 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 19:26:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 22:42:08 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "draw.h"
 
-static void	fill_m_v_map(t_fdf *fdf)
+static void	fill_map_m(t_fdf *fdf)
 {
 	int	y;
 	int	x;
@@ -26,7 +26,7 @@ static void	fill_m_v_map(t_fdf *fdf)
 		{
 			fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.world,
 					&fdf->map.o[y][x]);
-			fdf->map.m[y][x] =  matrix_times_vector(&fdf->mats.proj.m,
+			fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.proj.m,
 					&fdf->map.m[y][x]);
 		}
 	}
@@ -37,9 +37,9 @@ static int	get_color(double altitude_1, double altitude_2)
 	int	color;
 
 	if (altitude_1 > altitude_2)
-		color = altitude_1 * 512;
+		color = ((int)(altitude_1 + 0.5)) * 512;
 	else
-		color = altitude_2 * 512;
+		color = ((int)(altitude_2 + 0.5)) * 512;
 	((unsigned char *)&color)[3] = 0;
 	return (color);
 }
@@ -68,7 +68,7 @@ static void	draw_lines(t_fdf *fdf)
 void	draw_fdf(t_fdf *fdf)
 {
 	reset_img(&fdf->img, 0x000000);
-	fill_m_v_map(fdf);
+	fill_map_m(fdf);
 	draw_lines(fdf);
 	put_img(&fdf->img, &fdf->win);
 }
