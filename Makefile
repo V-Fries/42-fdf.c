@@ -8,7 +8,7 @@ H_FILES =	draw.h					\
 			move_camera.h			\
 			parsing.h				\
 			render_frame.h			\
-			start_mlx.h				\
+			start_fdf.h				\
 
 HEADERS = ${addprefix includes/, ${H_FILES}}
 
@@ -25,8 +25,7 @@ C_FILES =		draw/draw_clipped_line.c	\
 				init_fdf.c			\
 				move_camera.c		\
 				render_frame.c		\
-				start_mlx.c	\
-				#draw/line_drawing.c					\
+				start_fdf.c	\
 
 SRCS =			main.c	\
 				${addprefix srcs/, ${C_FILES}}

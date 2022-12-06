@@ -6,11 +6,11 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 05:34:32 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 01:19:02 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "start_mlx.h"
+#include "start_fdf.h"
 #include "init_fdf.h"
 #include "fdf.h"
 #include "ft_io.h"
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (ft_putstr("Map is missing\n"), 0);
 	init_fdf(&fdf, argv[1]);
-	start_mlx(&fdf);
+	start_fdf(&fdf);
 	// (void)argc;
 	// (void)argv;
 	// t_fdf	fdf;
