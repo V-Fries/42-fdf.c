@@ -38,6 +38,8 @@ typedef struct s_fdf
 	t_img		img;
 	t_keys		keys;
 	char		view_mode;
+	double		cam_speed;
+	double		cam_rot_speed;
 	t_map		map;
 	t_matrices	mats;
 }	t_fdf;

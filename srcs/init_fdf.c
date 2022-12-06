@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 05:33:10 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/06 01:16:36 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,53 @@ static void	init_matrices(t_fdf *fdf, double decal)
 			&fdf->mats.rot_y.m, &fdf->mats.trans.m);
 }
 
+static double	rot_speed_calculator(t_fdf *fdf)
+{
+	int	n;
+	int	i;
+
+	n = fdf->map.x_size + fdf->map.y_size;
+	i = 10;
+	while (n)
+	{
+		i--;
+		n /= 10;
+	}
+	if (i == 0)
+		return (0.25 * 1.0 * 0.025);
+	return (0.25 * (double)i * 0.025);
+}
+
+static double	move_speed_calculator(t_fdf *fdf)
+{
+	int		multiplied;
+	int		divisor;
+	double	tmp;
+
+	multiplied = fdf->map.x_size * fdf->map.y_size;
+	tmp = multiplied;
+	divisor = 1;
+	while (multiplied)
+	{
+		multiplied /= 10;
+		divisor++;
+	}
+	tmp = tmp / (double)divisor;
+	if (tmp > 500.0)
+		return (tmp * 0.0001);
+	return (0.25);
+}
+
 void	init_fdf(t_fdf *fdf, char *map_name)
 {
 	double	highest_point;
 	short	i;
 
-	(void)map_name;
 	fdf->win.mlx = mlx_init();
 	fdf->win.win = mlx_new_window(fdf->win.mlx, WINDOW_X, WINDOW_Y, "fdf");
 	highest_point = parse_map(&fdf->map, map_name);
+	fdf->cam_rot_speed = rot_speed_calculator(fdf);
+	fdf->cam_speed = move_speed_calculator(fdf);
 	i = -1;
 	while (++i < MAX_KEY)
 		fdf->keys.keys[i] = 0;
