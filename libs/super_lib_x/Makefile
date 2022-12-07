@@ -3,7 +3,8 @@ NAME =			libslx.a
 NAME_DEBUG =	libslx_debug.a
 
 
-HEADERS_NO_PATH =	keys.h		\
+HEADERS_NO_PATH =	colors.h	\
+					keys.h		\
 					lines.h		\
 					matrices.h	\
 					mlx_tools.h	\
@@ -21,6 +22,7 @@ C_FILES =		lines/clip_line.c			\
 				matrices/matrix_multiplication.c	\
 				matrices/projection_matrix.c		\
 				matrices/rotation_matrices.c		\
+				matrices/scale_matrix.c				\
 				matrices/translation_matrix.c		\
 				matrices/world_matrix.c				\
 \

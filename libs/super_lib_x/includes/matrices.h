@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/02 01:18:34 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 15:36:19 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define MATRICES_H
 
 # include "vector.h"
+
+enum e_proj
+{
+	PROJ_PERSEPECTIVE = 0,
+	PROJ_ISOMETRIC = 1,
+};
 
 typedef struct s_matrix_4
 {
@@ -23,7 +29,7 @@ typedef struct s_matrix_4
 typedef struct s_proj_m
 {
 	t_matrix_4	m;
-	char		type;
+	enum e_proj	type;
 	double		z_near;
 	double		z_far;
 	double		fov;
@@ -63,6 +69,8 @@ t_matrix_4	get_iso_proj_matrix(t_proj_m *data);
 t_matrix_4	get_rotation_z_matrix(double rotation);
 t_matrix_4	get_rotation_y_matrix(double rotation);
 t_matrix_4	get_rotation_x_matrix(double rotation);
+
+t_matrix_4	get_scale_matrix(double scale_factor);
 
 t_matrix_4	get_translation_matrix(double x, double y, double z);
 t_matrix_4	get_world_matrix(t_matrix_4 *rot_z, t_matrix_4 *rot_x,

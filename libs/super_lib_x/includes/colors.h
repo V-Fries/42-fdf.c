@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 13:53:36 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/07 14:35:25 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/07 16:04:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "start_fdf.h"
-#include "init_fdf.h"
-#include "fdf.h"
-#include "ft_io.h"
+#ifndef COLORS_H
+# define COLORS_H
 
-#include "parsing.h"
-#include <stdio.h>
-
-int	main(int argc, char **argv)
+enum
 {
-	t_fdf		fdf;
+	COLOR_WHITE = 0x00FFFFFF,
+};
 
-	if (argc < 2)
-		return (ft_putstr("Map is missing\n"), 0);
-	init_fdf(&fdf, argv[1]);
-	start_fdf(&fdf);
-}
+#endif

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/04 10:07:50 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 16:04:16 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,30 @@
 #include "draw.h"
 #include "keys.h"
 
-void	move_camera_y_x(t_fdf *fdf, int *keys)
+static void	move_camera_z(t_fdf *fdf, int *keys)
 {
 	if (keys[KEY_W])
 	{
 		fdf->mats.trans.z -= fdf->cam_speed;
+		if (fdf->mats.proj.type == PROJ_ISOMETRIC)
+			fdf->mats.proj.m = get_scale_matrix((fdf->mats.trans.z
+						/ fdf->map.y_size * fdf->map.x_size) * 0.0025);
 		update_translation_matrix(&fdf->mats);
 	}
 	if (keys[KEY_S])
 	{
 		fdf->mats.trans.z += fdf->cam_speed;
+		if (fdf->mats.proj.type == PROJ_ISOMETRIC)
+			fdf->mats.proj.m = get_scale_matrix((fdf->mats.trans.z
+						/ fdf->map.y_size * fdf->map.x_size) * 0.0025);
 		update_translation_matrix(&fdf->mats);
 	}
+}
+
+void	move_camera_y_x(t_fdf *fdf, int *keys)
+{
+	if (keys[KEY_W] || keys[KEY_S])
+		move_camera_z(fdf, keys);
 	if (keys[KEY_D])
 	{
 		fdf->mats.trans.x -= fdf->cam_speed;

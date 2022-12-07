@@ -16,9 +16,10 @@
 # include "mlx_tools.h"
 # include "matrices.h"
 # include "keys.h"
+# include <stdbool.h>
 
-# define WINDOW_X 1400
-# define WINDOW_Y 800
+# define WINDOW_X 1800
+# define WINDOW_Y 1200
 
 # define VIEW_POINTS 1
 # define VIEW_LINES 0
@@ -28,6 +29,7 @@ typedef struct s_map
 	int			**i_map;
 	t_vector_d	**o;
 	t_vector_d	**m;
+	int			highest_point;
 	int			y_size;
 	int			x_size;
 }	t_map;
@@ -38,6 +40,7 @@ typedef struct s_fdf
 	t_img		img;
 	t_keys		keys;
 	char		view_mode;
+	bool		colors;
 	double		cam_speed;
 	double		cam_rot_speed;
 	t_map		map;

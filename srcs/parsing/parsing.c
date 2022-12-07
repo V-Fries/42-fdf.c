@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 06:00:24 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 15:12:19 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static double	get_map_m_return_highest_point(t_map *map)
 				highest_point = map->o[y][x].z;
 		}
 	}
-	return (-highest_point);
+	return (highest_point);
 }
 
 

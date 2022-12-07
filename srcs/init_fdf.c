@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 01:16:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 15:14:01 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,11 @@ static double	move_speed_calculator(t_fdf *fdf)
 
 void	init_fdf(t_fdf *fdf, char *map_name)
 {
-	double	highest_point;
 	short	i;
 
 	fdf->win.mlx = mlx_init();
 	fdf->win.win = mlx_new_window(fdf->win.mlx, WINDOW_X, WINDOW_Y, "fdf");
-	highest_point = parse_map(&fdf->map, map_name);
+	fdf->map.highest_point = parse_map(&fdf->map, map_name);
 	fdf->cam_rot_speed = rot_speed_calculator(fdf);
 	fdf->cam_speed = move_speed_calculator(fdf);
 	i = -1;
@@ -97,6 +96,7 @@ void	init_fdf(t_fdf *fdf, char *map_name)
 		fdf->keys.keys[i] = 0;
 	fdf->keys.keys_pressed = 0;
 	init_image(&fdf->img, &fdf->win, WINDOW_Y, WINDOW_X);
-	highest_point = 10;
-	init_matrices(fdf, highest_point);
+	init_matrices(fdf, -fdf->map.highest_point);
+	fdf->view_mode = PROJ_PERSEPECTIVE;
+	fdf->colors = false;
 }
