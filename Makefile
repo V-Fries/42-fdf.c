@@ -2,13 +2,14 @@ NAME =			fdf
 
 NAME_DEBUG =	fdf_debug
 
-H_FILES =	draw.h					\
-			fdf.h					\
-			init_fdf.h				\
-			move_camera.h			\
-			parsing.h				\
-			render_frame.h			\
-			start_fdf.h				\
+H_FILES =	deal_key.h		\
+			draw.h			\
+			fdf.h			\
+			init_fdf.h		\
+			move_camera.h	\
+			parsing.h		\
+			render_frame.h	\
+			start_fdf.h		\
 
 HEADERS = ${addprefix includes/, ${H_FILES}}
 
@@ -19,11 +20,13 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 			-I includes
 
 
-C_FILES =		draw/draw_clipped_line.c	\
+C_FILES =		deal_key/deal_key.c		\
+				deal_key/move_camera.c	\
+				draw/draw_clipped_line.c	\
 				draw/draw.c					\
-				parsing/parsing.c	\
+				parsing/parsing_utils.c	\
+				parsing/parsing.c		\
 				init_fdf.c			\
-				move_camera.c		\
 				render_frame.c		\
 				start_fdf.c	\
 

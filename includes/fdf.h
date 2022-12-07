@@ -28,6 +28,7 @@ typedef struct s_map
 {
 	int			**i_map;
 	t_vector_d	**o;
+	t_vector_d	**a;
 	t_vector_d	**m;
 	int			highest_point;
 	int			y_size;

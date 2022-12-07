@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 15:22:31 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 19:20:59 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ static void	fill_map_m(t_fdf *fdf)
 		while (++x < fdf->map.x_size)
 		{
 			fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.world,
-					&fdf->map.o[y][x]);
-			//if (fdf->mats.proj.type == PROJ_PERSEPECTIVE)
-				fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.proj.m,
-						&fdf->map.m[y][x]);
+					&fdf->map.a[y][x]);
+			fdf->map.m[y][x] = matrix_times_vector(&fdf->mats.proj.m,
+					&fdf->map.m[y][x]);
 		}
 	}
 }

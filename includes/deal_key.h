@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_frame.c                                     :+:      :+:    :+:   */
+/*   deal_key.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 20:10:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 19:29:47 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/07 19:22:47 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/07 19:23:33 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "draw.h"
-#include "deal_key.h"
+#ifndef DEAL_KEY_H
+# define DEAL_KEY_H
 
-int	render_frame(t_fdf *fdf)
-{
-	if (fdf->keys.keys_pressed)
-		deal_key(fdf);
-	draw_fdf(fdf);
-	return (0);
-}
+# include "fdf.h"
+
+void	deal_key(t_fdf *fdf);
+
+#endif

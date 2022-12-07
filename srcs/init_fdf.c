@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 15:14:01 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 18:05:39 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ static void	init_matrices(t_fdf *fdf, double decal)
 	fdf->mats.proj.type = 0;
 	fdf->mats.rot_z.rot = 0.0;
 	fdf->mats.rot_z.m = get_rotation_z_matrix(fdf->mats.rot_z.rot);
-	fdf->mats.rot_x.rot = 0.0;
+	fdf->mats.rot_x.rot = -(M_PI / 4.0);
 	fdf->mats.rot_x.m = get_rotation_x_matrix(fdf->mats.rot_x.rot);
 	fdf->mats.rot_y.rot = 0.0;
 	fdf->mats.rot_y.m = get_rotation_y_matrix(fdf->mats.rot_y.rot);
 	fdf->mats.trans.x = 0.0;
-	fdf->mats.trans.y = 0.0;
+	fdf->mats.trans.y = 2.5;
 	if (fdf->map.x_size > fdf->map.y_size && fdf->map.x_size > decal)
 		decal = fdf->map.x_size;
 	else if (fdf->map.y_size > decal)

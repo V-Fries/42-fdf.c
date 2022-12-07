@@ -6,14 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 05:07:58 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 14:31:55 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 21:17:50 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYS_H
 # define KEYS_H
 
-# define MAX_KEY 258
+# define MAX_KEY 270
 
 typedef struct s_keys
 {
@@ -31,7 +31,10 @@ enum
 	KEY_E = 14,
 	KEY_Q = 12,
 	KEY_SPACE = 49,
-	KEY_SHIFT = 257,
+	KEY_SLASH = 44,
+	KEY_L_SHIFT = 257,
+	KEY_R_SHIFT = 258,
+	KEY_R_CTRL = 269,
 	KEY_UP = 126,
 	KEY_DOWN = 125,
 	KEY_LEFT = 123,
