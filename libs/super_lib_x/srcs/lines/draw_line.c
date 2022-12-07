@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 19:37:46 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 18:05:34 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/07 01:07:06 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ void	draw_line(t_line_point start, t_line_point end, t_img *img)
 	params.depth = end.depth;
 	if (params.starting_error_x > params.starting_error_y)
 		draw_low_slope(start, params, img);
-	else if (params.starting_error_x < params.starting_error_y)
+	else
 		draw_high_slope(start, params, img);
 }
