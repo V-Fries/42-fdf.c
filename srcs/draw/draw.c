@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:17:57 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:40:58 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,16 @@ static int	get_color(t_fdf *fdf, double altitude_1, double altitude_2)
 		color = altitude_1 - 0.5;
 	else
 		color = altitude_2 - 0.5;
-	if (color < -120)
+	if (color < -300)
 		color = COLOR_SNOW_WHITE;
-	else if (color < -50)
+	else if (color < -120)
 		color = COLOR_ROCK;
+	else if (color < -50)
+		color = COLOR_DARK_GRASS;
+	else if (color < -15)
+		color = COLOR_MID_GRASS;
 	else if (color < -6)
-		color = COLOR_GRASS_GREEN;
+		color = COLOR_LIGHT_GRASS;
 	else if (color < -2)
 		color = COLOR_SAND;
 	else
