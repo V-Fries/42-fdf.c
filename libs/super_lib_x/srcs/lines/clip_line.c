@@ -6,12 +6,11 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:54:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 18:29:18 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:22:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lines.h"
-#include "img.h"
 #include <stdbool.h>
 #include <stdint.h>
 

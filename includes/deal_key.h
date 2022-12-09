@@ -6,14 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:22:47 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 19:23:33 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:25:20 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEAL_KEY_H
 # define DEAL_KEY_H
-
-# include "fdf.h"
 
 void	deal_key(t_fdf *fdf);
 

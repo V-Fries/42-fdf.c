@@ -6,13 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 21:27:50 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:21:28 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
 #include "slx_utils.h"
-#include <stddef.h>
 #include <math.h>
 
 /*						Rotation X matrix visualisation

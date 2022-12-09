@@ -6,11 +6,10 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 02:40:12 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/01 06:15:40 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:22:10 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
 #include "matrices.h"
 #include <stdint.h>
 

@@ -6,15 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 13:55:44 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 15:35:13 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:21:54 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
 #include "slx_utils.h"
-#include "vector.h"
 #include <math.h>
-#include <stddef.h>
 
 /*					Prespective projection matrix visualisation
 

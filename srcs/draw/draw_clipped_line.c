@@ -6,13 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 18:35:40 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:18:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "lines.h"
-#include <stdlib.h>
 
 // v1 is assumed to be on the screen !
 static t_vector_d	get_fixed_vector(t_proj_m *proj,

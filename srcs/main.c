@@ -6,17 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:20:02 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 13:53:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:15:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "start_fdf.h"
 #include "init_fdf.h"
-#include "fdf.h"
 #include "ft_io.h"
 
-#include "parsing.h"
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {

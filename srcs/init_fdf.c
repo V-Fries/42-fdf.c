@@ -6,19 +6,15 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 17:39:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:14:51 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 #include "parsing.h"
-#include <math.h>
-
-#include <limits.h>
-#include <stdlib.h>
-
 #include "ft_numbers.h"
+#include <math.h>
 
 static void	init_matrices(t_fdf *fdf, double decal)
 {

@@ -6,14 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:01:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 01:18:10 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:16:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 #include "render_frame.h"
-#include "keys.h"
 
 void	start_fdf(t_fdf *fdf)
 {

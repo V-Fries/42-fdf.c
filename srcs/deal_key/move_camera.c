@@ -6,11 +6,10 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 18:03:39 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:18:31 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include "move_camera.h"
 #include <math.h>
 

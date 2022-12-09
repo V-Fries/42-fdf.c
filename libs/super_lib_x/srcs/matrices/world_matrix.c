@@ -6,13 +6,11 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 02:46:27 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/03 21:27:50 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 19:20:41 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrices.h"
-#include "slx_utils.h"
-#include <stddef.h>
 
 t_matrix_4	get_world_matrix(t_matrix_4 *rot_z, t_matrix_4 *rot_x,
 				t_matrix_4 *rot_y, t_matrix_4 *trans)
