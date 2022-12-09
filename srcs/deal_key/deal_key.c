@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:04:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 21:18:10 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 15:19:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static void	change_altitude(t_fdf *fdf)
 	int		x;
 	double	change;
 
-	if (fdf->keys.keys[KEY_SLASH] && fdf->keys.keys[KEY_R_SHIFT])
+	if (fdf->keys.keys[KEY_SEMI_COLON] && fdf->keys.keys[KEY_S_QUOTE])
 		return ;
-	if (fdf->keys.keys[KEY_R_SHIFT])
+	if (fdf->keys.keys[KEY_S_QUOTE])
 		change = 1.0;
 	else
 		change = -1.0;
@@ -86,6 +86,6 @@ void	deal_key(t_fdf *fdf)
 		change_view(fdf);
 	if (keys[KEY_C])
 		change_color(fdf);
-	if (keys[KEY_R_SHIFT] || keys[KEY_SLASH])
+	if (keys[KEY_SEMI_COLON] || keys[KEY_S_QUOTE])
 		change_altitude(fdf);
 }
