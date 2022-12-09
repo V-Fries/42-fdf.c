@@ -1,5 +1,6 @@
 # Other
 ignore.c
+test
 
 # Executables
 fdf
@@ -13,6 +14,7 @@ fdf_exemple
 *.d
 
 # Object files
+build
 .objs
 *.o
 *.ko

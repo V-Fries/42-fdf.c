@@ -20,21 +20,21 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 			-I includes
 
 
-C_FILES =		deal_key/deal_key.c		\
-				deal_key/move_camera.c	\
-				draw/draw_clipped_line.c	\
-				draw/draw.c					\
-				parsing/parsing_utils.c	\
-				parsing/parsing.c		\
-				init_fdf.c			\
-				render_frame.c		\
-				start_fdf.c	\
+SRCS_DIR = srcs/
 
-SRCS =			main.c	\
-				${addprefix srcs/, ${C_FILES}}
+SRCS =	deal_key/deal_key.c		\
+		deal_key/move_camera.c	\
+		draw/draw_clipped_line.c	\
+		draw/draw.c					\
+		parsing/parsing_utils.c	\
+		parsing/parsing.c		\
+		init_fdf.c			\
+		render_frame.c		\
+		start_fdf.c	\
+		main.c
 
 
-DIR_OBJS = 		./.objs/
+DIR_OBJS = 		build/
 
 OBJS =			${addprefix ${DIR_OBJS},${SRCS:.c=.o}}
 
@@ -104,7 +104,7 @@ $(NAME):		${OBJS}
 				${CC} ${FLAGS} ${FRAMEWORKS} ${INCLUDES}	\
 					${DEFAULT_L} ${OBJS} -o ${NAME}
 
-${DIR_OBJS}%.o: %.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
+${DIR_OBJS}%.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 debug:			${DIR_OBJS}
@@ -116,7 +116,7 @@ ${NAME_DEBUG}:	${OBJS_DEBUG}
 				${CC} ${FLAGS_DEBUG} ${FRAMEWORKS} ${INCLUDES}	\
 					${DEBUG_L} ${OBJS_DEBUG} -o ${NAME_DEBUG}
 
-${DIR_OBJS}%_debug.o: %.c ${SHARED_DEPENDENCIES} ${DEBUG_DEPENDENCIES}
+${DIR_OBJS}%_debug.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEBUG_DEPENDENCIES}
 					cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
 
 clean:

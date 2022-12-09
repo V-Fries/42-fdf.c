@@ -15,7 +15,9 @@ HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}	\
 					srcs/utils/slx_utils.h
 
 
-C_FILES =		lines/clip_line.c			\
+SRCS_PATH =		srcs/
+
+SRCS = 			lines/clip_line.c			\
 				lines/create_t_line_point.c	\
 				lines/draw_line.c			\
 \
@@ -34,10 +36,8 @@ C_FILES =		lines/clip_line.c			\
 				keys.c	\
 				mlx_tools.c
 
-SRCS = ${addprefix srcs/,${C_FILES}}
 
-
-DIR_OBJS = 		./.objs/
+DIR_OBJS = 		build/
 
 OBJS =			${addprefix ${DIR_OBJS},${SRCS:.c=.o}}
 
@@ -83,10 +83,10 @@ ${NAME_DEBUG}: ${OBJS_DEBUG}
 				cp ${MLX_PATH}libmlx.a ${NAME_DEBUG}
 				ar rcs ${NAME_DEBUG} ${OBJS_DEBUG}
 
-${DIR_OBJS}%.o: %.c ${HEADERS} Makefile ${MLX_A}
+${DIR_OBJS}%.o: ${SRCS_PATH}%.c ${HEADERS} Makefile ${MLX_A}
 				cc ${FLAGS} ${INCLUDES} -c $< -o $@
 
-${DIR_OBJS}%_debug.o: %.c ${HEADERS} Makefile ${MLX_A}
+${DIR_OBJS}%_debug.o: ${SRCS_PATH}%.c ${HEADERS} Makefile ${MLX_A}
 				cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
 
 ${DIR_OBJS}: Makefile
