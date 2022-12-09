@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 19:20:59 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 17:18:56 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,20 @@ static int	get_color(t_fdf *fdf, double altitude_1, double altitude_2)
 
 	if (fdf->colors == false)
 		return (COLOR_WHITE);
-	if (altitude_1 > altitude_2)
-		color = ((int)(altitude_1 + 0.5)) * fdf->map.highest_point;
+	if (altitude_1 < altitude_2)
+		color = altitude_1 - 0.5;
 	else
-		color = ((int)(altitude_2 + 0.5)) * fdf->map.highest_point;
+		color = altitude_2 - 0.5;
+	if (color < -120)
+		color = COLOR_SNOW_WHITE;
+	else if (color < -50)
+		color = COLOR_ROCK;
+	else if (color < -6)
+		color = COLOR_GRASS_GREEN;
+	else if (color < -2)
+		color = COLOR_SAND;
+	else
+		color = COLOR_SEA_BLUE + 32;
 	((unsigned char *)&color)[3] = 0;
 	return (color);
 }
