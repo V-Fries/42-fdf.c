@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 22:54:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 18:06:45 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 18:29:18 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lines.h"
-#include "mlx_tools.h"
+#include "img.h"
 #include <stdbool.h>
 #include <stdint.h>
 

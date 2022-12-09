@@ -6,13 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 19:37:46 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 01:07:06 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 18:32:47 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lines.h"
 #include "slx_utils.h"
-#include "mlx_tools.h"
 #include <stdbool.h>
 
 bool	line_clipping(t_line_point *start, t_line_point *end, t_img *img);
@@ -46,7 +45,8 @@ static void	draw_low_slope(t_line_point start,
 	i = -1;
 	while (++i <= params.starting_error_x)
 	{
-		put_pixel_on_img(img, start.y, start.x, params.color, params.depth);
+		put_pixel_on_img(img,
+			create_t_pixel(start.x, start.y, params.color, params.depth));
 		start.x += params.x_incr;
 		params.error_x -= params.diff_y;
 		if (params.error_x < 0)
@@ -65,7 +65,8 @@ static void	draw_high_slope(t_line_point start,
 	i = -1;
 	while (++i <= params.starting_error_y)
 	{
-		put_pixel_on_img(img, start.y, start.x, params.color, params.depth);
+		put_pixel_on_img(img,
+			create_t_pixel(start.x, start.y, params.color, params.depth));
 		start.y += params.y_incr;
 		params.error_y -= params.diff_x;
 		if (params.error_y < 0)
@@ -83,14 +84,16 @@ static void	draw_straight_line(t_line_point start, t_line_point end, t_img *img)
 		if (start.y > end.y)
 			return (draw_straight_line(end, start, img));
 		while (start.y <= end.y)
-			put_pixel_on_img(img, start.y++, start.x, end.color, end.depth);
+			put_pixel_on_img(img,
+				create_t_pixel(start.x, start.y++, end.color, end.depth));
 	}
 	else
 	{
 		if (start.x > end.x)
 			return (draw_straight_line(end, start, img));
 		while (start.x <= end.x)
-			put_pixel_on_img(img, start.y, start.x++, end.color, end.depth);
+			put_pixel_on_img(img,
+				create_t_pixel(start.x++, start.y, end.color, end.depth));
 	}
 }
 

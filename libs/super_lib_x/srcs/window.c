@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_fdf.h                                        :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 20:22:49 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 18:06:02 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/09 18:21:31 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/09 18:33:56 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef START_FDF_H
-# define START_FDF_H
+#include "window.h"
+#include "mlx.h"
+#include <stdlib.h>
 
-# include "fdf.h"
-
-void	start_fdf(t_fdf *fdf);
-
-#endif
+void	close_window(t_win *win)
+{
+	mlx_destroy_window(win->mlx, win->win);
+	exit(0);
+}

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_tools.c                                        :+:      :+:    :+:   */
+/*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 05:37:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/06 18:54:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 18:33:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_tools.h"
+#include "img.h"
 #include "mlx.h"
 #include "slx_utils.h"
-#include <stdlib.h>
 #include <limits.h>
-
-void	close_window(t_win *win)
-{
-	mlx_destroy_window(win->mlx, win->win);
-	exit(0);
-}
+#include <stdlib.h>
 
 int	put_img(t_img *img, t_win *win)
 {
@@ -70,13 +64,25 @@ void	reset_img(t_img *img, int background_color)
 	}
 }
 
-void	put_pixel_on_img(t_img *img, int y, int x, int color, double depth)
+void	put_pixel_on_img(t_img *img, t_pixel pixel)
 {
 	char	*dst;
 
-	if (img->depth[y][x] < depth)
+	if (img->depth[pixel.y][pixel.x] < pixel.depth)
 		return ;
-	img->depth[y][x] = depth;
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	img->depth[pixel.y][pixel.x] = pixel.depth;
+	dst = img->addr
+		+ (pixel.y * img->line_length + pixel.x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = pixel.color;
+}
+
+t_pixel	create_t_pixel(int x, int y, int color, double depth)
+{
+	t_pixel	new;
+
+	new.x = x;
+	new.y = y;
+	new.color = color;
+	new.depth = depth;
+	return (new);
 }

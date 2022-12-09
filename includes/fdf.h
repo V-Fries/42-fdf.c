@@ -13,7 +13,7 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "mlx_tools.h"
+# include "img.h"
 # include "matrices.h"
 # include "keys.h"
 # include <stdbool.h>

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_fdf.h                                        :+:      :+:    :+:   */
+/*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 20:22:49 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 18:06:02 by vfries           ###   ########lyon.fr   */
+/*   Created: 2022/12/09 18:19:28 by vfries            #+#    #+#             */
+/*   Updated: 2022/12/09 18:19:57 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef START_FDF_H
-# define START_FDF_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-# include "fdf.h"
+typedef struct s_win
+{
+	void	*mlx;
+	void	*win;
+}	t_win;
 
-void	start_fdf(t_fdf *fdf);
+void	close_window(t_win *win);
 
 #endif

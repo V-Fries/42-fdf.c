@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 14:29:21 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 18:35:40 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static void	draw_line_with_fixed_vectors(t_vector_d start, t_vector_d end,
 	}
 	if (start.y >= 0 && start.y < fdf->img.y_size
 		&& start.x >= 0 && start.x < fdf->img.x_size)
-		put_pixel_on_img(&fdf->img, start.y, start.x, color,
-			get_depth(start.z, end.z));
+		put_pixel_on_img(&fdf->img,
+			create_t_pixel(start.x, start.y, color, get_depth(start.z, end.z)));
 	if (end.y >= 0 && end.y < fdf->img.y_size
 		&& end.x >= 0 && end.x < fdf->img.x_size)
-		put_pixel_on_img(&fdf->img, end.y, end.x, color,
-			get_depth(start.z, end.z));
+		put_pixel_on_img(&fdf->img,
+			create_t_pixel(end.x, end.y, color, get_depth(start.z, end.z)));
 }
 
 //	If vector.w is below z_near, it means the vector is behind the screen

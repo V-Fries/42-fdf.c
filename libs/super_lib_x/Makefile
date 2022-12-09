@@ -4,12 +4,13 @@ NAME_DEBUG =	libslx_debug.a
 
 
 HEADERS_NO_PATH =	colors.h	\
+					img.h		\
 					keys.h		\
 					lines.h		\
 					matrices.h	\
-					mlx_tools.h	\
 					points.h	\
-					vector.h
+					vector.h	\
+					window.h
 
 HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}	\
 					srcs/utils/slx_utils.h
@@ -33,8 +34,9 @@ SRCS = 			lines/clip_line.c			\
 				vectors/vector_math.c	\
 				vectors/vector_tools.c	\
 \
+				img.c	\
 				keys.c	\
-				mlx_tools.c
+				window.c
 
 
 DIR_OBJS = 		build/
