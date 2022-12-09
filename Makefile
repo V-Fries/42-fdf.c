@@ -22,8 +22,9 @@ INCLUDES =	-I ${LIBFT_PATH}includes/	\
 
 SRCS_DIR = srcs/
 
-SRCS =	deal_key/deal_key.c		\
-		deal_key/move_camera.c	\
+SRCS =	deal_key/deal_key.c			\
+		deal_key/move_camera_z.c	\
+		deal_key/move_camera.c		\
 		draw/draw_clipped_line.c	\
 		draw/draw.c					\
 		parsing/parsing_utils.c	\

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 07:06:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 18:05:39 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 17:39:36 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include <limits.h>
 #include <stdlib.h>
+
+#include "ft_numbers.h"
 
 static void	init_matrices(t_fdf *fdf, double decal)
 {
@@ -43,6 +45,8 @@ static void	init_matrices(t_fdf *fdf, double decal)
 			fdf->mats.trans.y, fdf->mats.trans.z);
 	fdf->mats.world = get_world_matrix(&fdf->mats.rot_z.m, &fdf->mats.rot_x.m,
 			&fdf->mats.rot_y.m, &fdf->mats.trans.m);
+	fdf->iso_scale = ft_abs(WINDOW_X * WINDOW_Y
+			- (fdf->map.x_size * fdf->map.y_size)) * 0.000002;
 }
 
 static double	rot_speed_calculator(t_fdf *fdf)
@@ -85,10 +89,11 @@ static double	move_speed_calculator(t_fdf *fdf)
 void	init_fdf(t_fdf *fdf, char *map_name)
 {
 	short	i;
+	double	highest_point;
 
 	fdf->win.mlx = mlx_init();
 	fdf->win.win = mlx_new_window(fdf->win.mlx, WINDOW_X, WINDOW_Y, "fdf");
-	fdf->map.highest_point = parse_map(&fdf->map, map_name);
+	highest_point = parse_map(&fdf->map, map_name);
 	fdf->cam_rot_speed = rot_speed_calculator(fdf);
 	fdf->cam_speed = move_speed_calculator(fdf);
 	i = -1;
@@ -96,7 +101,7 @@ void	init_fdf(t_fdf *fdf, char *map_name)
 		fdf->keys.keys[i] = 0;
 	fdf->keys.keys_pressed = 0;
 	init_image(&fdf->img, &fdf->win, WINDOW_Y, WINDOW_X);
-	init_matrices(fdf, -fdf->map.highest_point);
+	init_matrices(fdf, -highest_point);
 	fdf->view_mode = PROJ_PERSEPECTIVE;
 	fdf->colors = false;
 }

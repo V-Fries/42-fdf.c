@@ -6,36 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/07 19:03:28 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 18:03:39 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrices.h"
-#include "mlx_tools.h"
-#include "math.h"
 #include "fdf.h"
-#include "draw.h"
-#include "keys.h"
-
-static void	move_camera_z(t_fdf *fdf, int *keys)
-{
-	if (keys[KEY_W])
-	{
-		fdf->mats.trans.z -= fdf->cam_speed;
-		if (fdf->mats.proj.type == PROJ_ISOMETRIC)
-			fdf->mats.proj.m = get_scale_matrix((fdf->mats.trans.z
-						/ fdf->map.y_size * fdf->map.x_size) * 0.0025);
-		update_translation_matrix(&fdf->mats);
-	}
-	if (keys[KEY_S])
-	{
-		fdf->mats.trans.z += fdf->cam_speed;
-		if (fdf->mats.proj.type == PROJ_ISOMETRIC)
-			fdf->mats.proj.m = get_scale_matrix((fdf->mats.trans.z
-						/ fdf->map.y_size * fdf->map.x_size) * 0.0025);
-		update_translation_matrix(&fdf->mats);
-	}
-}
+#include "move_camera.h"
+#include <math.h>
 
 void	move_camera_y_x(t_fdf *fdf, int *keys)
 {

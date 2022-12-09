@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:04:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 15:19:07 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/09 17:32:17 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	update_proj_mat(t_fdf *fdf, int *keys)
 {
 	if (fdf->mats.proj.type == PROJ_PERSEPECTIVE)
 	{
-		fdf->mats.proj.m = get_scale_matrix((fdf->mats.trans.z / fdf->map.y_size
-					* fdf->map.x_size) * 0.0025);
+		fdf->mats.proj.m = get_scale_matrix(fdf->iso_scale);
 		fdf->mats.proj.type = PROJ_ISOMETRIC;
 	}
 	else if (fdf->mats.proj.type == PROJ_ISOMETRIC)

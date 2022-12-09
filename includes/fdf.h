@@ -30,7 +30,6 @@ typedef struct s_map
 	t_vector_d	**o;
 	t_vector_d	**a;
 	t_vector_d	**m;
-	int			highest_point;
 	int			y_size;
 	int			x_size;
 }	t_map;
@@ -44,6 +43,7 @@ typedef struct s_fdf
 	bool		colors;
 	double		cam_speed;
 	double		cam_rot_speed;
+	double		iso_scale;
 	t_map		map;
 	t_matrices	mats;
 }	t_fdf;
