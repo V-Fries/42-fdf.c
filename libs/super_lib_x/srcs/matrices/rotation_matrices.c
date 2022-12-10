@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 00:03:17 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:21:28 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:16:21 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 [	0				0						0							1	]
 
 																			*/
-t_matrix_4	get_rotation_x_matrix(double rotation)
+t_matrix_4	get_rotation_x_matrix(double theta)
 {
 	t_matrix_4	m;
 
 	slx_bzero(&m, sizeof(t_matrix_4));
 	m.m[0][0] = 1.0;
-	m.m[1][1] = cos(rotation * 0.5);
-	m.m[1][2] = sin(rotation * 0.5);
+	m.m[1][1] = cos(theta * 0.5);
+	m.m[1][2] = sin(theta * 0.5);
 	m.m[2][1] = -m.m[1][2];
 	m.m[2][2] = m.m[1][1];
 	m.m[3][3] = 1.0;
@@ -44,13 +44,13 @@ t_matrix_4	get_rotation_x_matrix(double rotation)
 [	0						0				0							1	]
 
 																			*/
-t_matrix_4	get_rotation_y_matrix(double rotation)
+t_matrix_4	get_rotation_y_matrix(double theta)
 {
 	t_matrix_4	m;
 
 	slx_bzero(&m, sizeof(t_matrix_4));
-	m.m[0][0] = cos(rotation);
-	m.m[0][2] = sin(rotation);
+	m.m[0][0] = cos(theta);
+	m.m[0][2] = sin(theta);
 	m.m[2][0] = -m.m[0][2];
 	m.m[1][1] = 1.0;
 	m.m[2][2] = m.m[0][0];
@@ -66,13 +66,13 @@ t_matrix_4	get_rotation_y_matrix(double rotation)
 [	0						0				0							1	]
 
 																			*/
-t_matrix_4	get_rotation_z_matrix(double rotation)
+t_matrix_4	get_rotation_z_matrix(double theta)
 {
 	t_matrix_4	m;
 
 	slx_bzero(&m, sizeof(t_matrix_4));
-	m.m[0][0] = cos(rotation);
-	m.m[0][1] = sin(rotation);
+	m.m[0][0] = cos(theta);
+	m.m[0][1] = sin(theta);
 	m.m[1][0] = -m.m[0][1];
 	m.m[1][1] = m.m[0][0];
 	m.m[2][2] = 1;

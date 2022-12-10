@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:59:30 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:18:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:27:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	move_camera_key_w(t_fdf *fdf)
 {
-	if (fdf->mats.proj.type == PROJ_ISOMETRIC)
+	if (fdf->mats.proj.type != PROJ_PERSEPECTIVE)
 	{
 		fdf->iso_scale += fdf->cam_speed * 0.01 + (fdf->iso_scale * 0.01);
 		fdf->mats.proj.m = get_scale_matrix(fdf->iso_scale);

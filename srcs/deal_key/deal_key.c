@@ -6,20 +6,29 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:04:41 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:18:50 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:25:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "move_camera.h"
+#include "ft_math.h"
 
 static void	update_proj_mat(t_fdf *fdf, int *keys)
 {
 	if (fdf->mats.proj.type == PROJ_PERSEPECTIVE)
 	{
 		fdf->mats.proj.m = get_scale_matrix(fdf->iso_scale);
+		fdf->mats.rot_z.rot = ft_angle_to_theta(45.0);
+		update_rot_z_matrix(&fdf->mats);
+		fdf->mats.rot_x.rot = ft_angle_to_theta(-120.0);
+		update_rot_x_matrix(&fdf->mats);
+		fdf->mats.rot_y.rot = 0.0;
+		update_rot_y_matrix(&fdf->mats);
 		fdf->mats.proj.type = PROJ_ISOMETRIC;
 	}
 	else if (fdf->mats.proj.type == PROJ_ISOMETRIC)
+		fdf->mats.proj.type = PROJ_ORTHOGRAPHIC;
+	else
 	{
 		fdf->mats.proj.m = get_prespective_proj_matrix(&fdf->mats.proj);
 		fdf->mats.proj.type = PROJ_PERSEPECTIVE;

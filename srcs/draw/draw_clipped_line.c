@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 03:47:24 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:18:11 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:28:42 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@ static double	get_depth(double depth_1, double depth_2)
 
 static t_vector_d	adjust_vector_to_screen(t_fdf *fdf, t_vector_d vector)
 {
-	if (fdf->mats.proj.type == PROJ_PERSEPECTIVE)
-	{
-		vector = vector_divide(&vector, vector.w);
-		vector.x = (vector.x + 1.0) * (double)WINDOW_X / 2.0 + 0.5;
-		vector.y = (vector.y + 1.0) * (double)WINDOW_Y / 2.0 + 0.5;
-	}
-	else
+	if (fdf->mats.proj.type != PROJ_PERSEPECTIVE)
 	{
 		vector.x = (vector.x + 1.0) + (double)WINDOW_X / 2.0 + 0.5;
 		vector.y = (vector.y + 1.0) + (double)WINDOW_Y / 2.0 + 0.5;
+		return (vector);
 	}
+	vector = vector_divide(&vector, vector.w);
+	vector.x = (vector.x + 1.0) * (double)WINDOW_X / 2.0 + 0.5;
+	vector.y = (vector.y + 1.0) * (double)WINDOW_Y / 2.0 + 0.5;
 	return (vector);
 }
 

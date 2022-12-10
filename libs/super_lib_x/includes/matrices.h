@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:43:10 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:23:20 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:13:51 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ enum e_proj
 {
 	PROJ_PERSEPECTIVE = 0,
 	PROJ_ISOMETRIC = 1,
+	PROJ_ORTHOGRAPHIC = 2,
 };
 
 typedef struct s_matrix_4

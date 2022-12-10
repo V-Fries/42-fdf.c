@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:12:39 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:18:31 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 19:09:47 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	move_camera_y_x(t_fdf *fdf, int *keys)
 
 static void	secure_rot(double *rot)
 {
-	if (*rot > M_PI * 4)
-		*rot -= M_PI * 4;
-	else if (*rot < M_PI * 4)
-		*rot += M_PI * 4;
+	if (*rot > M_PI * 4.0)
+		*rot -= M_PI * 4.0;
+	else if (*rot < M_PI * 4.0)
+		*rot += M_PI * 4.0;
 }
 
 void	move_camera_up_down_rotation_z(t_fdf *fdf, int *keys)
@@ -49,13 +49,13 @@ void	move_camera_up_down_rotation_z(t_fdf *fdf, int *keys)
 		fdf->mats.trans.y -= fdf->cam_speed;
 		update_translation_matrix(&fdf->mats);
 	}
-	if (keys[KEY_E])
+	if (keys[KEY_E] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_z.rot += fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_z.rot);
 		update_rot_z_matrix(&fdf->mats);
 	}
-	if (keys[KEY_Q])
+	if (keys[KEY_Q] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_z.rot -= fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_z.rot);
@@ -65,25 +65,25 @@ void	move_camera_up_down_rotation_z(t_fdf *fdf, int *keys)
 
 void	move_camera_rotation(t_fdf *fdf, int *keys)
 {
-	if (keys[KEY_UP])
+	if (keys[KEY_UP] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_x.rot += fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_x.rot);
 		update_rot_x_matrix(&fdf->mats);
 	}
-	if (keys[KEY_DOWN])
+	if (keys[KEY_DOWN] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_x.rot -= fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_x.rot);
 		update_rot_x_matrix(&fdf->mats);
 	}
-	if (keys[KEY_LEFT])
+	if (keys[KEY_LEFT] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_y.rot += fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_y.rot);
 		update_rot_y_matrix(&fdf->mats);
 	}
-	if (keys[KEY_RIGHT])
+	if (keys[KEY_RIGHT] && fdf->mats.proj.type != PROJ_ISOMETRIC)
 	{
 		fdf->mats.rot_y.rot -= fdf->cam_rot_speed;
 		secure_rot(&fdf->mats.rot_y.rot);
