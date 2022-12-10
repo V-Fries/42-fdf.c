@@ -3,7 +3,7 @@ NAME =			libslx.a
 NAME_DEBUG =	libslx_debug.a
 
 
-HEADERS_NO_PATH =	colors.h	\
+HEADERS_INCLUDES =	colors.h	\
 					img.h		\
 					keys.h		\
 					lines.h		\
@@ -12,8 +12,10 @@ HEADERS_NO_PATH =	colors.h	\
 					vector.h	\
 					window.h
 
-HEADERS = 			${addprefix includes/,${HEADERS_NO_PATH}}	\
-					srcs/utils/slx_utils.h
+HEADERS_SRCS =		slx_utils.h
+
+HEADERS = 			${addprefix includes/,${HEADERS_INCLUDES}}	\
+					${addprefix ${SRCS_PATH}headers/,${HEADERS_SRCS}}
 
 
 SRCS_PATH =		srcs/
@@ -61,8 +63,8 @@ RMF =	 		rm -f
 MKDIR = 		mkdir -p
 
 
-INCLUDES =		-I includes/	\
-				-I srcs/utils/	\
+INCLUDES =		-I includes/			\
+				-I ${SRCS_PATH}headers/	\
 				-I ${MLX_PATH}
 
 
