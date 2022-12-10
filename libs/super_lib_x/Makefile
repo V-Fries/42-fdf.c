@@ -5,7 +5,7 @@ NAME_DEBUG =	libslx_debug.a
 
 HEADERS_INCLUDES =	colors.h	\
 					img.h		\
-					keys.h		\
+					hook.h		\
 					lines.h		\
 					matrices.h	\
 					points.h	\
@@ -37,7 +37,7 @@ SRCS = 			lines/clip_line.c			\
 				vectors/vector_tools.c	\
 \
 				img.c	\
-				keys.c	\
+				hook.c	\
 				window.c
 
 

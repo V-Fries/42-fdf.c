@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   hook.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 05:07:58 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 15:18:14 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 14:19:30 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYS_H
-# define KEYS_H
+#ifndef HOOK_H
+# define HOOK_H
+
+# include "window.h"
 
 # define MAX_KEY 270
 
@@ -58,7 +60,9 @@ enum
 	ON_DESTROY = 17
 };
 
-int	key_down(int key, t_keys *keys);
-int	key_up(int key, t_keys *keys);
+int		key_down(int key, t_keys *keys);
+int		key_up(int key, t_keys *keys);
+int		close_window_hook(t_win *win);
+void	slx_hook(t_win *win, t_keys *keys);
 
 #endif

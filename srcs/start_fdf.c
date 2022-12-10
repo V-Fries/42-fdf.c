@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 20:01:16 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:16:37 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 14:20:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 void	start_fdf(t_fdf *fdf)
 {
-	mlx_hook(fdf->win.win, ON_KEYDOWN, 2, &key_down, &fdf->keys);
-	mlx_hook(fdf->win.win, ON_KEYUP, 3, &key_up, &fdf->keys);
+	slx_hook(&fdf->win, &fdf->keys);
 	mlx_loop_hook(fdf->win.mlx, &render_frame, fdf);
 	mlx_loop(fdf->win.mlx);
 }
