@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 19:23:28 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:40:58 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 13:15:27 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,28 @@ static void	fill_map_m(t_fdf *fdf)
 
 static int	get_color(t_fdf *fdf, double altitude_1, double altitude_2)
 {
-	int	color;
+	double	highest_altitude;
 
 	if (fdf->colors == false)
 		return (COLOR_WHITE);
 	if (altitude_1 < altitude_2)
-		color = altitude_1 - 0.5;
+		highest_altitude = -altitude_1;
 	else
-		color = altitude_2 - 0.5;
-	if (color < -300)
-		color = COLOR_SNOW_WHITE;
-	else if (color < -120)
-		color = COLOR_ROCK;
-	else if (color < -50)
-		color = COLOR_DARK_GRASS;
-	else if (color < -15)
-		color = COLOR_MID_GRASS;
-	else if (color < -6)
-		color = COLOR_LIGHT_GRASS;
-	else if (color < -2)
-		color = COLOR_SAND;
+		highest_altitude = -altitude_2;
+	if (highest_altitude > 300.0)
+		return (COLOR_SNOW_WHITE);
+	else if (highest_altitude > 120.0)
+		return (COLOR_ROCK);
+	else if (highest_altitude > 50.0)
+		return (COLOR_DARK_GRASS);
+	else if (highest_altitude > 15.0)
+		return (COLOR_MID_GRASS);
+	else if (highest_altitude > 6.0)
+		return (COLOR_LIGHT_GRASS);
+	else if (highest_altitude > 2.0)
+		return (COLOR_SAND);
 	else
-		color = COLOR_SEA_BLUE + 32;
-	((unsigned char *)&color)[3] = 0;
-	return (color);
+		return (COLOR_SEA_BLUE + 32);
 }
 
 static void	draw_lines(t_fdf *fdf)
