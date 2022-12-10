@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:17:42 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/10 15:35:30 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	get_map_o(t_map *map, t_list *lines)
 {
 	int	y;
 
+	if (lines == NULL)
+		return (map->o = NULL, (void)0);
 	map->y_size = ft_lstsize(lines);
 	map->o = malloc(sizeof(t_vector_d *) * map->y_size);
 	if (map->o == NULL)
