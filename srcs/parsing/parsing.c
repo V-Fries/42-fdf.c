@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/10 15:35:30 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/12 13:57:59 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	get_map_o(t_map *map, t_list *lines)
 	int	y;
 
 	if (lines == NULL)
-		return (map->o = NULL, (void)0);
+		return (map->o = (void *)-1, (void)0);
 	map->y_size = ft_lstsize(lines);
 	map->o = malloc(sizeof(t_vector_d *) * map->y_size);
 	if (map->o == NULL)
@@ -99,5 +99,10 @@ double	parse_map(t_map *map, char *file_name)
 		get_map_a_and_m(map);
 	if (map->o == NULL)
 		return (ft_putstr("ERROR: Parsing failed.\n"), exit(1), 0);
+	if (map->o == (void *)-1)
+	{
+		ft_putstr("ERROR: Parsing failed. Map doesn't exist or is empty.\n");
+		exit(1);
+	}
 	return (get_highest_point(map));
 }
