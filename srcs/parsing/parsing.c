@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/12 13:57:59 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 08:08:43 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ static void	get_map_o(t_map *map, t_list *lines)
 
 	if (lines == NULL)
 		return (map->o = (void *)-1, (void)0);
+	ft_lst_reverse(&lines);
 	map->y_size = ft_lstsize(lines);
 	map->o = malloc(sizeof(t_vector_d *) * map->y_size);
 	if (map->o == NULL)
 		return (ft_lstclear(&lines, &ft_free_split), (void)0);
 	map->x_size = ft_split_size(lines->content);
-	y = map->y_size;
-	while (y-- > 0)
+	y = -1;
+	while (++y < map->y_size)
 	{
 		map->o[y] = malloc(sizeof(t_vector_d) * map->x_size);
 		if (map->o[y] == NULL)
@@ -95,8 +96,6 @@ double	parse_map(t_map *map, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	get_map_o(map, get_lines(fd));
 	close(fd);
-	if (map->o != NULL)
-		get_map_a_and_m(map);
 	if (map->o == NULL)
 		return (ft_putstr("ERROR: Parsing failed.\n"), exit(1), 0);
 	if (map->o == (void *)-1)
@@ -104,5 +103,6 @@ double	parse_map(t_map *map, char *file_name)
 		ft_putstr("ERROR: Parsing failed. Map doesn't exist or is empty.\n");
 		exit(1);
 	}
+	get_map_a_and_m(map);
 	return (get_highest_point(map));
 }

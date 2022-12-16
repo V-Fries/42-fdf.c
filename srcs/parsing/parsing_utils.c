@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 18:09:36 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:17:01 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 08:17:53 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	fill_x(t_map *map, int y, t_list *lines)
 	{
 		if (((char **)lines->content)[x] == NULL)
 			return (ft_lstclear(&lines, &ft_free_split),
+				free(map->o[y]), map->o[y] = NULL,
 				free_map_2d_arr(map->o), map->o = NULL, false);
 		map->o[y][x] = create_vector(x - map->x_size / 2,
 				y - map->y_size / 2,
