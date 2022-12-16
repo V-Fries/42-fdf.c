@@ -44,7 +44,7 @@ OBJS_DEBUG =	${addprefix ${DIR_OBJS},${SRCS:.c=_debug.o}}
 
 FLAGS =			-Wall -Wextra -Werror -O3
 
-FLAGS_DEBUG	=	${FLAGS} -g3 -fsanitize=address
+FLAGS_DEBUG	=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 
 SLX_PATH =		libs/super_lib_x/
