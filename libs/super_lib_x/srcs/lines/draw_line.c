@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 19:37:46 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/09 19:22:26 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/16 11:12:01 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 #include <stdbool.h>
 
 bool	line_clipping(t_line_point *start, t_line_point *end, t_img *img);
-
-// static int	get_color(t_line_point start, t_line_point end)
-// {
-// 	(void)start;
-// 	(void)end;
-// 	return (0xFFFFFF);
-// }
 
 typedef struct s_bresenham
 {
