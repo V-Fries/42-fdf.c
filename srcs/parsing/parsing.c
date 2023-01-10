@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 17:45:25 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/16 08:08:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/10 02:13:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ft_string.h"
 #include "ft_linked_list.h"
 #include "ft_io.h"
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -94,15 +95,18 @@ double	parse_map(t_map *map, char *file_name)
 	int			fd;
 
 	fd = open(file_name, O_RDONLY);
-	get_map_o(map, get_lines(fd));
-	close(fd);
-	if (map->o == NULL)
-		return (ft_putstr("ERROR: Parsing failed.\n"), exit(1), 0);
-	if (map->o == (void *)-1)
+	if (fd != -1)
 	{
-		ft_putstr("ERROR: Parsing failed. Map doesn't exist or is empty.\n");
+		get_map_o(map, get_lines(fd));
+		close(fd);
+	}
+	else
+	{
+		perror("File couldn't be read");
 		exit(1);
 	}
+	if (map->o == NULL)
+		return (ft_putstr("ERROR: Parsing failed.\n"), exit(1), 0);
 	get_map_a_and_m(map);
 	return (get_highest_point(map));
 }
